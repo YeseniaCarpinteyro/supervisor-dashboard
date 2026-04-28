@@ -384,9 +384,7 @@ input[type="date"]:focus { border-color:var(--accent); }
 // 🔧 CONFIGURACIÓN
 // ══════════════════════════════════════════════════════════════
 const CONFIG = {
-  siteUrl:     'https://thegreenbriercompanies.sharepoint.com/sites/GBRX/GMO/Concarril/areas/Operaciones',
-  listName:    'Avance de produccin',
-  accessToken: 'TU_TOKEN_AQUI',
+  backendUrl:  'https://supervisor-backend-z81u.onrender.com/datos',
   refreshMs:   15000
 };
 
@@ -492,19 +490,15 @@ const getCS   = rs => rs.filter(r=>r.Tema==='Liberacion').reduce((s,r)=>s+(parse
 // CARGA
 // ══════════════════════════════════════════════════════════════
 async function loadData() {
-  if (CONFIG.accessToken === 'TU_TOKEN_AQUI') {
-    allData = sampleData(); processData(); return;
-  }
   try {
-    const hoy = new Date().toISOString().split('T')[0];
-    const url = `${CONFIG.siteUrl}/_api/lists/getbytitle('${CONFIG.listName}')/items?$filter=Fecha ge '${hoy}'&$orderby=Id&$top=2000`;
-    const res = await fetch(url,{headers:{'Authorization':`Bearer ${CONFIG.accessToken}`,'Accept':'application/json;odata=nometadata'}});
-    if(!res.ok) throw new Error();
-    allData = (await res.json()).value||[];
-  } catch(e) { allData = sampleData(); }
+    const res = await fetch('https://supervisor-backend-z81u.onrender.com/datos');
+    if (!res.ok) throw new Error();
+    allData = await res.json();
+  } catch(e) {
+    allData = sampleData();
+  }
   processData();
 }
-
 function processData() {
   const proyectos = [...new Set(allData.map(d=>d.Proyecto).filter(Boolean))];
   ['filterProyecto','filterProyecto2','histProyecto'].forEach(sid => {

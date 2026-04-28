@@ -491,7 +491,7 @@ const getCS   = rs => rs.filter(r=>r.Tema==='Liberacion').reduce((s,r)=>s+(parse
 // ══════════════════════════════════════════════════════════════
 async function loadData() {
   try {
-    const res = await fetch(CONFIG.backendUrl);
+    const res = await fetch('https://supervisor-backend-z81u.onrender.com/datos'');
     if (!res.ok) throw new Error();
     allData = await res.json();
   } catch(e) {

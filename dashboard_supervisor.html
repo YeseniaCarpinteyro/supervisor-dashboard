@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Supervisor — Concarril</title>
+<title>Dashboard Supervisor</title>
 <style>
 /*
   =============================================
@@ -50,7 +50,7 @@ header {
 
 /*
   🖼️ LOGO
-  Cambia "TU_LOGO.png" por el nombre de tu archivo.
+  Cambia "logo.png" por el nombre de tu archivo.
   Debe estar en la MISMA CARPETA que este HTML.
 */
 .logo-img { height:44px; width:auto; object-fit:contain; }
@@ -275,15 +275,15 @@ input[type="date"]:focus { border-color:var(--accent); }
 <header>
   <div class="logo-area">
     <!--
-      🖼️ LOGO: Cambia "TU_LOGO.png" por el nombre de tu archivo.
+      🖼️ LOGO: Cambia "logo.png" por el nombre de tu archivo.
       Debe estar en la MISMA CARPETA que este HTML.
       Ejemplo: <img src="logo_concarril.png" class="logo-img" alt="Logo">
     -->
-    <img src="TU_LOGO.png" class="logo-img" alt="Logo"
+    <img src="logo.png" class="logo-img" alt="Logo"
          onerror="this.style.display='none';document.getElementById('logoFB').style.display='flex'">
     <div id="logoFB" class="logo-fallback" style="display:none">GB</div>
     <div>
-      <div class="logo-text">Concarril</div>
+      <div class="logo-text">LÍNEA ACTIVA</div>
       <div class="logo-sub">Dashboard Supervisor</div>
     </div>
   </div>
@@ -384,7 +384,9 @@ input[type="date"]:focus { border-color:var(--accent); }
 // 🔧 CONFIGURACIÓN
 // ══════════════════════════════════════════════════════════════
 const CONFIG = {
-  backendUrl:  'https://supervisor-backend-z81u.onrender.com/',
+  siteUrl:     'https://thegreenbriercompanies.sharepoint.com/sites/GBRX/GMO/Concarril/areas/Operaciones',
+  listName:    'Avance de produccin',
+  accessToken: 'TU_TOKEN_AQUI',
   refreshMs:   15000
 };
 
@@ -490,13 +492,16 @@ const getCS   = rs => rs.filter(r=>r.Tema==='Liberacion').reduce((s,r)=>s+(parse
 // CARGA
 // ══════════════════════════════════════════════════════════════
 async function loadData() {
-  try {
-    const res = await fetch('https://supervisor-backend-z81u.onrender.com/datos'');
-    if (!res.ok) throw new Error();
-    allData = await res.json();
-  } catch(e) {
-    allData = sampleData();
+  if (CONFIG.accessToken === 'TU_TOKEN_AQUI') {
+    allData = sampleData(); processData(); return;
   }
+  try {
+    const hoy = new Date().toISOString().split('T')[0];
+    const url = `${CONFIG.siteUrl}/_api/lists/getbytitle('${CONFIG.listName}')/items?$filter=Fecha ge '${hoy}'&$orderby=Id&$top=2000`;
+    const res = await fetch(url,{headers:{'Authorization':`Bearer ${CONFIG.accessToken}`,'Accept':'application/json;odata=nometadata'}});
+    if(!res.ok) throw new Error();
+    allData = (await res.json()).value||[];
+  } catch(e) { allData = sampleData(); }
   processData();
 }
 

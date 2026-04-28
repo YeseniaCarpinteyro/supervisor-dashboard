@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Supervisor — Concarril</title>
+<style>
+/*
+  =============================================
+  🎨 COLORES — Modifica estas variables para cambiar la paleta
+  =============================================
+*/
+:root {
+  --bg:       #0b1221;
+  --surface:  #0f1a2e;
+  --surface2: #152035;
+  --border:   #1e3050;
+  --accent:   #00e676;
+  --text:     #ffffff;
+  --text-dim: #7a9abd;
+  --green:    #00e676;
+  --red:      #ff5252;
+  --warning:  #ffab40;
+  --blue:     #40c4ff;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: Arial, 'Century Gothic', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 32px;
+  background: var(--surface);
+  border-bottom: 2px solid var(--accent);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo-area { display:flex; align-items:center; gap:14px; }
+
+/*
+  🖼️ LOGO
+  Cambia "TU_LOGO.png" por el nombre de tu archivo.
+  Debe estar en la MISMA CARPETA que este HTML.
+*/
+.logo-img { height:44px; width:auto; object-fit:contain; }
+.logo-fallback {
+  width:44px; height:44px;
+  background:linear-gradient(135deg,#00e676,#00b050);
+  border-radius:8px; display:flex; align-items:center; justify-content:center;
+  font-size:16px; font-weight:800; color:#000;
+}
+.logo-text { font-size:18px; font-weight:700; color:var(--accent); }
+.logo-sub  { font-size:11px; color:var(--text-dim); letter-spacing:1.5px; text-transform:uppercase; }
+.header-right { display:flex; align-items:center; gap:20px; }
+.live-badge {
+  display:flex; align-items:center; gap:6px;
+  background:rgba(0,230,118,.1); border:1px solid rgba(0,230,118,.4);
+  padding:5px 14px; border-radius:20px; font-size:11px; color:var(--green); letter-spacing:1px;
+}
+.live-dot { width:7px; height:7px; background:var(--green); border-radius:50%; animation:pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+.header-time { font-family:'Courier New',monospace; font-size:15px; color:var(--accent); font-weight:bold; }
+
+/* ── TABS ── */
+.tabs { display:flex; padding:0 32px; background:var(--surface); border-bottom:1px solid var(--border); }
+.tab {
+  padding:12px 28px; cursor:pointer; font-size:13px; font-weight:700;
+  color:var(--text-dim); border-bottom:3px solid transparent; transition:all .2s;
+  font-family:Arial,sans-serif;
+}
+.tab:hover { color:var(--text); }
+.tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+/* ── MAIN ── */
+.main { padding:24px 32px; }
+.screen { display:none; }
+.screen.active { display:block; }
+
+/* ── FILTERS ── */
+.filters-bar { display:flex; align-items:flex-end; gap:16px; margin-bottom:20px; flex-wrap:wrap; }
+.filter-group { display:flex; flex-direction:column; gap:5px; }
+.filter-label { font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1.5px; }
+select {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text);
+  padding:8px 14px; border-radius:6px; font-size:13px; font-family:Arial,sans-serif;
+  cursor:pointer; outline:none; min-width:160px; transition:border-color .2s;
+}
+select:hover,select:focus { border-color:var(--accent); }
+.btn-action {
+  background:rgba(0,230,118,.12); border:1px solid rgba(0,230,118,.35);
+  color:var(--accent); padding:8px 20px; border-radius:6px;
+  cursor:pointer; font-size:13px; font-family:Arial,sans-serif;
+  font-weight:700; transition:all .2s;
+}
+.btn-action:hover { background:rgba(0,230,118,.22); }
+
+/* ── CONFIG BANNER ── */
+.config-banner {
+  background:rgba(0,230,118,.06); border:1px solid rgba(0,230,118,.2);
+  border-radius:10px; padding:14px 20px; margin-bottom:20px;
+  display:flex; align-items:flex-start; gap:12px;
+  font-size:12px; color:var(--text-dim); line-height:1.6;
+}
+.config-banner strong { color:var(--accent); }
+code {
+  background:var(--surface2); border:1px solid var(--border);
+  padding:1px 6px; border-radius:4px;
+  font-family:'Courier New',monospace; font-size:11px; color:var(--blue);
+}
+
+/* ── TIMELINE ── */
+.timeline-container { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+.timeline-header {
+  padding:14px 24px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.timeline-title { font-size:14px; font-weight:700; color:var(--text); font-family:Arial,sans-serif; }
+.timeline-legend { display:flex; gap:16px; flex-wrap:wrap; }
+.legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:var(--text-dim); font-family:Arial,sans-serif; }
+.legend-dot { width:12px; height:12px; border-radius:3px; }
+.timeline-scroll { overflow-x:auto; padding:0 24px 20px; }
+.timeline-grid { min-width:900px; position:relative; }
+.hour-ruler { display:flex; margin-left:150px; border-bottom:1px solid var(--border); padding:10px 0 6px; }
+.hour-tick { flex:1; text-align:left; font-size:10px; font-family:'Courier New',monospace; color:var(--text-dim); border-left:1px solid var(--border); padding-left:4px; min-width:56px; }
+.timeline-row { display:flex; align-items:center; border-bottom:1px solid var(--border); min-height:50px; }
+.timeline-row:last-child { border-bottom:none; }
+.row-label { width:150px; min-width:150px; padding:0 14px; font-size:12px; font-weight:700; color:var(--text); line-height:1.3; font-family:Arial,sans-serif; }
+.row-label-sub { font-size:10px; color:var(--text-dim); font-weight:400; }
+.row-track { flex:1; height:34px; position:relative; background:rgba(255,255,255,.02); border-radius:4px; margin:8px 0; }
+.block {
+  position:absolute; height:100%; border-radius:4px; cursor:pointer;
+  transition:filter .15s,transform .15s; display:flex;
+  align-items:center; justify-content:center; overflow:hidden; min-width:3px;
+}
+.block:hover { filter:brightness(1.25); transform:scaleY(1.08); z-index:10; }
+.block-produccion { background:linear-gradient(90deg,#00b050,#00e676); border:1px solid rgba(0,230,118,.6); }
+.block-paro       { background:linear-gradient(90deg,#c62828,#ff5252); border:1px solid rgba(255,82,82,.6); }
+.block-comedor    { background:linear-gradient(90deg,#e65100,#ffab40); border:1px solid rgba(255,171,64,.6); }
+.block.highlighted { outline:2px solid #fff; filter:brightness(1.35); z-index:20; }
+.block-label { font-size:9px; font-family:'Courier New',monospace; color:rgba(255,255,255,.95); white-space:nowrap; overflow:hidden; padding:0 4px; font-weight:bold; }
+
+/* ── TOOLTIP ── */
+.tooltip {
+  position:fixed; background:var(--surface2); border:1px solid var(--accent);
+  border-radius:10px; padding:12px 16px; font-size:12px;
+  z-index:1000; pointer-events:none; display:none; min-width:220px;
+  box-shadow:0 16px 40px rgba(0,0,0,.6); font-family:Arial,sans-serif;
+}
+.tooltip.visible { display:block; }
+.tooltip-title { font-size:13px; font-weight:700; color:var(--accent); margin-bottom:8px; }
+.tooltip-row { display:flex; justify-content:space-between; gap:14px; padding:3px 0; border-bottom:1px solid var(--border); font-size:11px; font-family:'Courier New',monospace; }
+.tooltip-row:last-child { border-bottom:none; }
+.tooltip-key { color:var(--text-dim); }
+.tooltip-val { color:var(--text); font-weight:bold; }
+
+/* ── PANEL DETALLE ── */
+.detail-panel {
+  position:fixed; right:-440px; top:0; width:420px; height:100vh;
+  background:var(--surface); border-left:2px solid var(--accent);
+  z-index:200; transition:right .3s cubic-bezier(.4,0,.2,1); overflow-y:auto; padding:24px;
+}
+.detail-panel.open { right:0; }
+.detail-close {
+  position:absolute; top:16px; right:16px;
+  background:var(--surface2); border:1px solid var(--border); color:var(--text);
+  width:32px; height:32px; border-radius:6px; cursor:pointer; font-size:16px;
+  display:flex; align-items:center; justify-content:center;
+}
+.detail-title { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:4px; padding-right:40px; font-family:Arial,sans-serif; }
+.detail-sub { font-size:11px; font-family:'Courier New',monospace; color:var(--text-dim); margin-bottom:20px; }
+.detail-stat { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px 16px; margin-bottom:8px; }
+.detail-stat-label { font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; font-family:Arial,sans-serif; }
+.detail-stat-value { font-size:22px; font-weight:700; color:var(--text); font-family:Arial,sans-serif; }
+.detail-stat-value.green { color:var(--green); }
+.detail-stat-value.red { color:var(--red); }
+.detail-section-title { font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1.5px; margin:16px 0 8px; font-family:Arial,sans-serif; }
+.detail-interval { display:flex; align-items:center; gap:10px; padding:8px 12px; background:var(--surface2); border-radius:6px; margin-bottom:5px; border-left:3px solid var(--green); }
+.detail-interval.paro { border-left-color:var(--red); }
+.detail-interval.comedor { border-left-color:var(--warning); }
+.detail-interval-type { font-size:10px; color:var(--text-dim); min-width:80px; font-family:Arial,sans-serif; }
+.detail-interval-time { font-size:11px; font-family:'Courier New',monospace; color:var(--text); flex:1; }
+.detail-interval-dur { font-size:11px; font-family:'Courier New',monospace; color:var(--accent); font-weight:bold; }
+
+/* ── KPIs ── */
+.kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-bottom:24px; }
+.kpi-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px 22px; position:relative; overflow:hidden; font-family:Arial,sans-serif; }
+.kpi-card::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; }
+.kpi-card.green::before { background:var(--green); }
+.kpi-card.red::before   { background:var(--red); }
+.kpi-card.blue::before  { background:var(--blue); }
+.kpi-card.yellow::before{ background:var(--warning); }
+.kpi-label { font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px; }
+.kpi-value { font-size:38px; font-weight:700; line-height:1; margin-bottom:4px; }
+.kpi-sub   { font-size:11px; color:var(--text-dim); font-family:'Courier New',monospace; }
+
+/* ── CHARTS ── */
+.charts-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+@media(max-width:900px){ .charts-grid{grid-template-columns:1fr;} }
+.chart-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px 22px; font-family:Arial,sans-serif; }
+.chart-title { font-size:13px; font-weight:700; margin-bottom:16px; color:var(--text); }
+
+/* Gráfica vertical */
+.vertical-chart-wrap { overflow-x:auto; }
+.vertical-chart { display:flex; align-items:flex-end; gap:20px; height:200px; padding-bottom:36px; border-bottom:1px solid var(--border); min-width:fit-content; }
+.v-group { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.v-bars  { display:flex; align-items:flex-end; gap:4px; height:160px; }
+.v-bar { width:28px; border-radius:4px 4px 0 0; transition:height .8s cubic-bezier(.4,0,.2,1); min-height:2px; position:relative; }
+.v-bar.real     { background:linear-gradient(180deg,#00e676,#00b050); }
+.v-bar.objetivo { background:rgba(0,230,118,.18); border:1px dashed rgba(0,230,118,.5); border-bottom:none; }
+.v-bar-val { font-size:10px; font-family:'Courier New',monospace; color:var(--accent); font-weight:bold; position:absolute; top:-16px; left:50%; transform:translateX(-50%); white-space:nowrap; }
+.v-bar-val.dim { color:var(--text-dim); }
+.v-label { font-size:10px; color:var(--text-dim); text-align:center; max-width:70px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.v-pct   { font-size:11px; font-family:'Courier New',monospace; font-weight:bold; margin-top:2px; }
+.chart-legend { display:flex; gap:14px; margin-top:12px; }
+
+/* Barras horizontales */
+.bar-chart { display:flex; flex-direction:column; gap:10px; }
+.bar-row { display:flex; align-items:center; gap:10px; }
+.bar-name { font-size:11px; color:var(--text-dim); min-width:120px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-family:Arial,sans-serif; }
+.bar-track { flex:1; height:22px; background:var(--surface2); border-radius:4px; overflow:hidden; }
+.bar-fill { height:100%; border-radius:4px; transition:width .8s cubic-bezier(.4,0,.2,1); display:flex; align-items:center; padding-left:8px; }
+.bar-fill-label { font-size:10px; font-family:'Courier New',monospace; color:rgba(255,255,255,.9); white-space:nowrap; }
+.bar-val { font-size:11px; font-family:'Courier New',monospace; color:var(--text); min-width:50px; text-align:right; }
+
+/* Tabla paros */
+.table-wrap { overflow-x:auto; }
+.paros-table { width:100%; border-collapse:collapse; font-size:12px; }
+.paros-table th { text-align:left; padding:10px 14px; font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; border-bottom:1px solid var(--border); background:var(--surface2); white-space:nowrap; font-family:Arial,sans-serif; }
+.paros-table td { padding:10px 14px; border-bottom:1px solid var(--border); font-family:'Courier New',monospace; }
+.paros-table tr:last-child td { border-bottom:none; }
+.paros-table tr:hover td { background:var(--surface2); }
+.badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:10px; font-family:Arial,sans-serif; font-weight:700; white-space:nowrap; }
+.badge-paro      { background:rgba(255,82,82,.15);  color:var(--red);     border:1px solid rgba(255,82,82,.3); }
+.badge-comedor   { background:rgba(255,171,64,.15); color:var(--warning); border:1px solid rgba(255,171,64,.3); }
+.badge-liberacion{ background:rgba(0,230,118,.15);  color:var(--green);   border:1px solid rgba(0,230,118,.3); }
+
+/* Historial */
+.date-filter { display:flex; align-items:flex-end; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+input[type="date"] { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:8px 14px; border-radius:6px; font-size:13px; font-family:'Courier New',monospace; cursor:pointer; outline:none; }
+input[type="date"]:focus { border-color:var(--accent); }
+.historial-table { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+.historial-table table { width:100%; border-collapse:collapse; font-size:12px; }
+.historial-table th { text-align:left; padding:12px 16px; font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; background:var(--surface2); border-bottom:1px solid var(--border); white-space:nowrap; font-family:Arial,sans-serif; }
+.historial-table td { padding:12px 16px; border-bottom:1px solid var(--border); font-family:'Courier New',monospace; color:var(--text); }
+.historial-table tr:last-child td { border-bottom:none; }
+.historial-table tr:hover td { background:rgba(255,255,255,.02); }
+
+/* Loading */
+.loading { display:flex; align-items:center; justify-content:center; padding:60px; color:var(--text-dim); font-size:13px; gap:10px; font-family:Arial,sans-serif; }
+.spinner { width:18px; height:18px; border:2px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.empty-state { text-align:center; padding:50px; color:var(--text-dim); font-size:13px; font-family:Arial,sans-serif; }
+</style>
+</head>
+<body>
+
+<div class="tooltip" id="tooltip"></div>
+<div class="detail-panel" id="detailPanel">
+  <button class="detail-close" onclick="closeDetail()">✕</button>
+  <div id="detailContent"></div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <!--
+      🖼️ LOGO: Cambia "TU_LOGO.png" por el nombre de tu archivo.
+      Debe estar en la MISMA CARPETA que este HTML.
+      Ejemplo: <img src="logo_concarril.png" class="logo-img" alt="Logo">
+    -->
+    <img src="TU_LOGO.png" class="logo-img" alt="Logo"
+         onerror="this.style.display='none';document.getElementById('logoFB').style.display='flex'">
+    <div id="logoFB" class="logo-fallback" style="display:none">GB</div>
+    <div>
+      <div class="logo-text">Concarril</div>
+      <div class="logo-sub">Dashboard Supervisor</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="live-badge"><div class="live-dot"></div>EN VIVO</div>
+    <div class="header-time" id="headerTime">--:--:--</div>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab(0)">📊 Línea de Tiempo</div>
+  <div class="tab"        onclick="switchTab(1)">📈 Resumen del Día</div>
+  <div class="tab"        onclick="switchTab(2)">📅 Historial</div>
+</div>
+
+<div class="main">
+
+  <!-- SCREEN 1: LÍNEA DE TIEMPO -->
+  <div class="screen active" id="screen0">
+    <div class="config-banner">
+      <span>⚙️</span>
+      <div>
+        <strong>Modo de prueba:</strong> Mostrando datos de ejemplo. 
+        Cuando se configure la conexión con SharePoint, los datos reales aparecerán aquí automáticamente.
+        La página se actualiza cada <strong>15 segundos</strong>.
+      </div>
+    </div>
+    <div class="filters-bar">
+      <div class="filter-group">
+        <div class="filter-label">Proyecto</div>
+        <select id="filterProyecto" onchange="applyFilters()"><option value="">Todos</option></select>
+      </div>
+    </div>
+    <div class="timeline-container">
+      <div class="timeline-header">
+        <div class="timeline-title">Producción del día — 07:00 a 16:00</div>
+        <div class="timeline-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Producción (misma pieza = mismo color)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Paro</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--warning)"></div>Comedor</div>
+        </div>
+      </div>
+      <div class="timeline-scroll">
+        <div class="timeline-grid" id="timelineGrid">
+          <div class="loading"><div class="spinner"></div>Cargando...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: RESUMEN -->
+  <div class="screen" id="screen1">
+    <div class="filters-bar">
+      <div class="filter-group">
+        <div class="filter-label">Proyecto</div>
+        <select id="filterProyecto2" onchange="applyFilters2()"><option value="">Todos</option></select>
+      </div>
+    </div>
+    <div class="kpi-grid" id="kpiGrid"><div class="loading"><div class="spinner"></div>Cargando...</div></div>
+    <div class="charts-grid" id="chartsGrid"></div>
+    <div class="chart-card">
+      <div class="chart-title">Paros registrados hoy</div>
+      <div class="table-wrap">
+        <table class="paros-table">
+          <thead>
+            <tr>
+              <th>Hora inicio</th><th>Hora fin</th><th>Ensamble</th>
+              <th>Tipo de paro</th><th>Motivo específico</th><th>Duración</th>
+            </tr>
+          </thead>
+          <tbody id="parosBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: HISTORIAL -->
+  <div class="screen" id="screen2">
+    <div class="date-filter">
+      <div class="filter-group"><div class="filter-label">Desde</div><input type="date" id="dateFrom"></div>
+      <div class="filter-group"><div class="filter-label">Hasta</div><input type="date" id="dateTo"></div>
+      <div class="filter-group">
+        <div class="filter-label">Proyecto</div>
+        <select id="histProyecto"><option value="">Todos</option></select>
+      </div>
+      <button class="btn-action" style="margin-top:18px" onclick="loadHistorial()">Buscar</button>
+    </div>
+    <div class="historial-table" id="historialTable">
+      <div class="empty-state">Selecciona un rango de fechas y presiona Buscar</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// 🔧 CONFIGURACIÓN
+// ══════════════════════════════════════════════════════════════
+const CONFIG = {
+  siteUrl:     'https://thegreenbriercompanies.sharepoint.com/sites/GBRX/GMO/Concarril/areas/Operaciones',
+  listName:    'Avance de produccin',
+  accessToken: 'TU_TOKEN_AQUI',
+  refreshMs:   15000
+};
+
+// Ajuste de zona horaria (SharePoint guarda UTC, MX = sumar horas)
+const TZ_OFFSET = 1;  // Cambia este número si la diferencia cambia
+
+function adjTZ(iso) {
+  if (!iso) return null;
+  const d = new Date(iso);
+  d.setHours(d.getHours() + TZ_OFFSET);
+  return d;
+}
+
+// Jornada visible en línea de tiempo
+const H_INI = 7, H_FIN = 16;
+
+// ══════════════════════════════════════════════════════════════
+// CATÁLOGO DE PAROS
+// Tema = "Paro"  →  Motivo del tema = tipo  →  Comentario = motivo específico
+// Tema = "Comedor" → Motivo del tema = "COMEDOR" → Comentario = "NA"
+// ══════════════════════════════════════════════════════════════
+const PAROS = {
+  MANTENIMIENTO: ['Grúa Pórtico','Grúa Bandera','Grúa Viajera','Máquinas de Soldar','Falla de Electricidad','Falla de Gantry','Giros','Pistola Huck','Equipo de Inducción'],
+  MATERIALES:    ['Falta de Material','Falta de Racks','Falta de Parte Primaria por Rechazo','Falta de Especialidades','Falta de Movimientos'],
+  SEGURIDAD:     ['Incidencia de Seguridad','Exámenes de Servicio Médico','Capacitaciones de Seguridad','Platica de 5 Minutos'],
+  RH:            ['Juntas de Comunicaciones','Asambleas Sindicales'],
+  MANUFACTURA:   ['Falla en Dispositivos','Plantilla Fuera de Dimensión'],
+  CALIDAD:       ['Material Fuera de Especificación','Falta de Liberación']
+};
+
+// ══════════════════════════════════════════════════════════════
+// DATOS DE PRUEBA
+// ══════════════════════════════════════════════════════════════
+function sampleData() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const rows  = [];
+  let id = 1;
+
+  const ens = [
+    { proyecto:'Gondola Mill', ensamble:'Stub Sill',  nave:'Nave 1', lote:'R42455' },
+    { proyecto:'Gondola Mill', ensamble:'Frentes',    nave:'Nave 2', lote:'R42455' },
+    { proyecto:'Flat Car',     ensamble:'Bolster',    nave:'Nave 3', lote:'R42420' },
+    { proyecto:'Flat Car',     ensamble:'Side Sill',  nave:'Nave 4', lote:'R42420' },
+  ];
+
+  window.OBJETIVOS = { 'Stub Sill':4, 'Frentes':3, 'Bolster':5, 'Side Sill':4 };
+  const tipos = Object.keys(PAROS);
+
+  ens.forEach(e => {
+    let t = new Date(today.getTime() + H_INI * 3600000);
+    for (let p = 0; p < 4; p++) {
+      const pid  = `PIEZA-${String(id).padStart(4,'0')}`;
+      const dur1 = 900000 + Math.random()*3600000;
+      const fin1 = new Date(t.getTime() + dur1);
+      if (fin1.getHours() >= H_FIN) break;
+
+      if (Math.random() > 0.3) {
+        // Normal → Paro → Liberacion
+        rows.push({ ID:id++, Fecha:today.toISOString(), 'Hora de inicio':t.toISOString(), 'Hora final':fin1.toISOString(), Proyecto:e.proyecto, Ensamble:e.ensamble, Nave:e.nave, Lote:e.lote, Tema:'Normal', 'Motivo del tema':'Normal', Comentario:'NA', 'Pieza ID':pid });
+
+        const esComedor = Math.random() > 0.6;
+        const tipo      = esComedor ? 'COMEDOR' : tipos[Math.floor(Math.random()*tipos.length)];
+        const motivos   = esComedor ? ['Comedor'] : PAROS[tipo];
+        const motivo    = motivos[Math.floor(Math.random()*motivos.length)];
+        const durParo   = 300000 + Math.random()*1800000;
+        const finParo   = new Date(fin1.getTime() + durParo);
+
+        rows.push({ ID:id++, Fecha:today.toISOString(), 'Hora de inicio':fin1.toISOString(), 'Hora final':finParo.toISOString(), Proyecto:e.proyecto, Ensamble:e.ensamble, Nave:e.nave, Lote:e.lote, Tema:esComedor?'Comedor':'Paro', 'Motivo del tema':tipo, Comentario:motivo, 'Pieza ID':'' });
+
+        const dur2 = 900000 + Math.random()*3600000;
+        const fin2 = new Date(finParo.getTime() + dur2);
+        if (fin2.getHours() < H_FIN) {
+          const cs = Math.random() > 0.4 ? '1' : '0.5';
+          rows.push({ ID:id++, Fecha:today.toISOString(), 'Hora de inicio':finParo.toISOString(), 'Hora final':fin2.toISOString(), Proyecto:e.proyecto, Ensamble:e.ensamble, Nave:e.nave, Lote:e.lote, Tema:'Liberacion', 'Motivo del tema':'Normal', Comentario:cs, 'Pieza ID':pid });
+          t = fin2;
+        } else break;
+      } else {
+        // Solo Liberacion
+        const cs = Math.random() > 0.4 ? '1' : '0.5';
+        rows.push({ ID:id++, Fecha:today.toISOString(), 'Hora de inicio':t.toISOString(), 'Hora final':fin1.toISOString(), Proyecto:e.proyecto, Ensamble:e.ensamble, Nave:e.nave, Lote:e.lote, Tema:'Liberacion', 'Motivo del tema':'Normal', Comentario:cs, 'Pieza ID':pid });
+        t = fin1;
+      }
+    }
+  });
+  return rows;
+}
+
+// ══════════════════════════════════════════════════════════════
+// ESTADO
+// ══════════════════════════════════════════════════════════════
+let allData=[], filteredData=[], filteredData2=[], activeTab=0, selectedPID=null;
+
+// ══════════════════════════════════════════════════════════════
+// UTILIDADES
+// ══════════════════════════════════════════════════════════════
+const fmtTime = v => { if(!v)return'--'; const d=typeof v==='string'?adjTZ(v):v; return d&&!isNaN(d)?d.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}):'--'; };
+const fmtDur  = ms => { if(!ms||isNaN(ms)||ms<0)return'0s'; const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000); return h>0?`${h}h ${m}m`:m>0?`${m}m ${s}s`:`${s}s`; };
+const getDur  = r  => { const s=adjTZ(r['Hora de inicio']),e=adjTZ(r['Hora final']); return(!s||!e)?0:Math.max(0,e-s); };
+const isParo  = t  => t==='Paro'||t==='Comedor';
+const getCS   = rs => rs.filter(r=>r.Tema==='Liberacion').reduce((s,r)=>s+(parseFloat(r.Comentario)||0.5),0);
+
+// ══════════════════════════════════════════════════════════════
+// CARGA
+// ══════════════════════════════════════════════════════════════
+async function loadData() {
+  if (CONFIG.accessToken === 'TU_TOKEN_AQUI') {
+    allData = sampleData(); processData(); return;
+  }
+  try {
+    const hoy = new Date().toISOString().split('T')[0];
+    const url = `${CONFIG.siteUrl}/_api/lists/getbytitle('${CONFIG.listName}')/items?$filter=Fecha ge '${hoy}'&$orderby=Id&$top=2000`;
+    const res = await fetch(url,{headers:{'Authorization':`Bearer ${CONFIG.accessToken}`,'Accept':'application/json;odata=nometadata'}});
+    if(!res.ok) throw new Error();
+    allData = (await res.json()).value||[];
+  } catch(e) { allData = sampleData(); }
+  processData();
+}
+
+function processData() {
+  const proyectos = [...new Set(allData.map(d=>d.Proyecto).filter(Boolean))];
+  ['filterProyecto','filterProyecto2','histProyecto'].forEach(sid => {
+    const sel=document.getElementById(sid); if(!sel)return;
+    const prev=sel.value;
+    sel.innerHTML='<option value="">Todos</option>';
+    proyectos.forEach(p=>sel.innerHTML+=`<option value="${p}"${p===prev?' selected':''}>${p}</option>`);
+  });
+  applyFilters(); applyFilters2();
+}
+
+function applyFilters() {
+  const p=document.getElementById('filterProyecto').value;
+  filteredData=allData.filter(d=>!p||d.Proyecto===p);
+  if(activeTab===0) renderTimeline();
+}
+
+function applyFilters2() {
+  const sel=document.getElementById('filterProyecto2'); if(!sel)return;
+  const p=sel.value;
+  filteredData2=allData.filter(d=>!p||d.Proyecto===p);
+  if(activeTab===1) renderResumen();
+}
+
+// ══════════════════════════════════════════════════════════════
+// LÍNEA DE TIEMPO
+// ══════════════════════════════════════════════════════════════
+function renderTimeline() {
+  const grid=document.getElementById('timelineGrid');
+  if(!filteredData.length){grid.innerHTML='<div class="empty-state">Sin datos para mostrar</div>';return;}
+
+  const hoy=new Date(); hoy.setHours(0,0,0,0);
+  const tMin=new Date(hoy.getTime()+H_INI*3600000);
+  const tMax=new Date(hoy.getTime()+H_FIN*3600000);
+  const span=tMax-tMin;
+
+  const grupos={};
+  filteredData.forEach(d=>{
+    const k=`${d.Proyecto}||${d.Ensamble}`;
+    if(!grupos[k]) grupos[k]={proyecto:d.Proyecto,ensamble:d.Ensamble,rows:[]};
+    grupos[k].rows.push(d);
+  });
+
+  let html='<div class="hour-ruler">';
+  for(let h=H_INI;h<=H_FIN;h++) html+=`<div class="hour-tick">${String(h).padStart(2,'0')}:00</div>`;
+  html+='</div>';
+
+  Object.values(grupos).forEach(g=>{
+    html+=`<div class="timeline-row">
+      <div class="row-label">${g.ensamble}<br><span class="row-label-sub">${g.proyecto}</span></div>
+      <div class="row-track">`;
+
+    g.rows.forEach(row=>{
+      const s=adjTZ(row['Hora de inicio']), e=adjTZ(row['Hora final']);
+      if(!s||!e) return;
+      const cs=new Date(Math.max(s,tMin)), ce=new Date(Math.min(e,tMax));
+      if(cs>=ce) return;
+      const left =((cs-tMin)/span)*100;
+      const width=Math.max(((ce-cs)/span)*100,0.2);
+      const tema =row.Tema;
+      const pid  =row['Pieza ID']||'';
+      let cls='block-produccion';
+      if(tema==='Paro')    cls='block-paro';
+      if(tema==='Comedor') cls='block-comedor';
+      const hl=selectedPID&&pid&&pid===selectedPID;
+      const rj=JSON.stringify(row).replace(/"/g,'&quot;');
+      const gj=JSON.stringify(g.rows).replace(/"/g,'&quot;');
+      html+=`<div class="block ${cls}${hl?' highlighted':''}" style="left:${left}%;width:${width}%" data-pid="${pid}"
+        onmouseenter="showTT(event,${rj})" onmouseleave="hideTT()"
+        onclick="clickBlock('${pid}',${gj})">
+        ${width>2?`<span class="block-label">${fmtDur(e-s)}</span>`:''}
+      </div>`;
+    });
+
+    html+='</div></div>';
+  });
+
+  grid.innerHTML=html;
+}
+
+function clickBlock(pid, rows) {
+  if(!pid) return;
+  if(selectedPID===pid){selectedPID=null;renderTimeline();closeDetail();return;}
+  selectedPID=pid; renderTimeline(); showDetail(pid,rows);
+}
+
+// ══════════════════════════════════════════════════════════════
+// TOOLTIP
+// ══════════════════════════════════════════════════════════════
+function showTT(event, row) {
+  const tt=document.getElementById('tooltip');
+  const esP=isParo(row.Tema);
+  tt.innerHTML=`
+    <div class="tooltip-title">${row.Tema}${esP?' · '+row['Motivo del tema']:''}</div>
+    <div class="tooltip-row"><span class="tooltip-key">Ensamble</span><span class="tooltip-val">${row.Ensamble}</span></div>
+    <div class="tooltip-row"><span class="tooltip-key">Inicio</span><span class="tooltip-val">${fmtTime(row['Hora de inicio'])}</span></div>
+    <div class="tooltip-row"><span class="tooltip-key">Fin</span><span class="tooltip-val">${fmtTime(row['Hora final'])}</span></div>
+    <div class="tooltip-row"><span class="tooltip-key">Duración</span><span class="tooltip-val">${fmtDur(getDur(row))}</span></div>
+    ${esP&&row.Comentario&&row.Comentario!=='NA'?`<div class="tooltip-row"><span class="tooltip-key">Motivo</span><span class="tooltip-val">${row.Comentario}</span>`:''}
+    ${row.Tema==='Liberacion'?`<div class="tooltip-row"><span class="tooltip-key">Carset</span><span class="tooltip-val">${parseFloat(row.Comentario)||0.5}</span></div>`:''}
+    <div style="margin-top:6px;font-size:10px;color:var(--text-dim)">Click para ver detalle de pieza</div>`;
+  const x=event.clientX+14;
+  tt.style.left=(x+230>window.innerWidth?event.clientX-240:x)+'px';
+  tt.style.top=(event.clientY-10)+'px';
+  tt.classList.add('visible');
+}
+function hideTT(){document.getElementById('tooltip').classList.remove('visible');}
+
+// ══════════════════════════════════════════════════════════════
+// DETALLE PIEZA
+// ══════════════════════════════════════════════════════════════
+function showDetail(pid, rows) {
+  const panel=document.getElementById('detailPanel');
+  const cont =document.getElementById('detailContent');
+  const pRows=rows.filter(r=>r['Pieza ID']===pid);
+  if(!pRows.length) return;
+
+  const prodRows=pRows.filter(r=>!isParo(r.Tema));
+  const tProd=prodRows.reduce((s,r)=>s+getDur(r),0);
+  const pSms=Math.min(...pRows.map(r=>{const d=adjTZ(r['Hora de inicio']);return d?d.getTime():Infinity;}));
+  const pEms=Math.max(...pRows.map(r=>{const d=adjTZ(r['Hora final']);return d?d.getTime():0;}));
+  const parosI=rows.filter(r=>{
+    if(r['Pieza ID']) return false;
+    const t=adjTZ(r['Hora de inicio']);
+    return t&&t.getTime()>=pSms&&t.getTime()<=pEms;
+  });
+  const tParo=parosI.reduce((s,r)=>s+getDur(r),0);
+  const isLib=pRows.some(r=>r.Tema==='Liberacion');
+  const libR =pRows.find(r=>r.Tema==='Liberacion');
+  const cs   =libR?(parseFloat(libR.Comentario)||0.5):'—';
+
+  cont.innerHTML=`
+    <div class="detail-title">${pRows[0].Ensamble}</div>
+    <div class="detail-sub">${pRows[0].Proyecto} · ID: ${pid.substring(0,16)}…</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+      <div class="detail-stat"><div class="detail-stat-label">Tiempo producción</div><div class="detail-stat-value green">${fmtDur(tProd)}</div></div>
+      <div class="detail-stat"><div class="detail-stat-label">Tiempo en paros</div><div class="detail-stat-value red">${fmtDur(tParo)}</div></div>
+      <div class="detail-stat"><div class="detail-stat-label">Estado</div><div class="detail-stat-value" style="font-size:15px;color:${isLib?'var(--green)':'var(--warning)'}">${isLib?'✅ Liberada':'🔄 En proceso'}</div></div>
+      <div class="detail-stat"><div class="detail-stat-label">Carsets</div><div class="detail-stat-value green">${isLib?cs:'—'}</div></div>
+    </div>
+    <div class="detail-section-title">Intervalos de producción (misma pieza)</div>
+    ${prodRows.map(r=>`<div class="detail-interval">
+      <div class="detail-interval-type">${r.Tema}</div>
+      <div class="detail-interval-time">${fmtTime(r['Hora de inicio'])} → ${fmtTime(r['Hora final'])}</div>
+      <div class="detail-interval-dur">${fmtDur(getDur(r))}</div>
+    </div>`).join('')}
+    ${parosI.length?`
+      <div class="detail-section-title">Paros durante esta pieza</div>
+      ${parosI.map(r=>`
+        <div class="detail-interval ${r.Tema==='Comedor'?'comedor':'paro'}">
+          <div class="detail-interval-type">${r['Motivo del tema']}</div>
+          <div class="detail-interval-time">${fmtTime(r['Hora de inicio'])} → ${fmtTime(r['Hora final'])}</div>
+          <div class="detail-interval-dur">${fmtDur(getDur(r))}</div>
+        </div>
+        ${r.Comentario&&r.Comentario!=='NA'?`<div style="font-size:10px;font-family:'Courier New';color:var(--text-dim);padding:2px 12px 6px">💬 ${r.Comentario}</div>`:''}`).join('')}
+    `:'<div style="font-size:11px;color:var(--text-dim);padding:8px 0">Sin paros durante esta pieza</div>'}
+    <div class="detail-stat" style="margin-top:14px">
+      <div class="detail-stat-label">Tiempo total de la pieza</div>
+      <div class="detail-stat-value">${fmtDur(tProd+tParo)}</div>
+    </div>`;
+
+  panel.classList.add('open');
+}
+function closeDetail(){document.getElementById('detailPanel').classList.remove('open');selectedPID=null;renderTimeline();}
+
+// ══════════════════════════════════════════════════════════════
+// RESUMEN
+// ══════════════════════════════════════════════════════════════
+function renderResumen() {
+  const data=filteredData2;
+  const libs =data.filter(d=>d.Tema==='Liberacion');
+  const paros=data.filter(d=>isParo(d.Tema));
+  const tParo=paros.reduce((s,r)=>s+getDur(r),0);
+  const tProd=data.filter(d=>!isParo(d.Tema)).reduce((s,r)=>s+getDur(r),0);
+  const cs   =getCS(data);
+  const ef   =tProd+tParo>0?Math.round(tProd/(tProd+tParo)*100):0;
+
+  document.getElementById('kpiGrid').innerHTML=`
+    <div class="kpi-card green"><div class="kpi-label">Piezas liberadas</div><div class="kpi-value" style="color:var(--green)">${libs.length}</div><div class="kpi-sub">${cs} carsets completados</div></div>
+    <div class="kpi-card red"><div class="kpi-label">Paros registrados</div><div class="kpi-value" style="color:var(--red)">${paros.length}</div><div class="kpi-sub">${fmtDur(tParo)} tiempo perdido</div></div>
+    <div class="kpi-card blue"><div class="kpi-label">Tiempo producción</div><div class="kpi-value" style="color:var(--blue)">${fmtDur(tProd)}</div><div class="kpi-sub">tiempo activo hoy</div></div>
+    <div class="kpi-card yellow"><div class="kpi-label">Eficiencia</div><div class="kpi-value" style="color:var(--warning)">${ef}%</div><div class="kpi-sub">producción vs paros</div></div>`;
+
+  // Gráfica vertical
+  const porEns={};
+  libs.forEach(d=>{if(!porEns[d.Ensamble])porEns[d.Ensamble]=0;porEns[d.Ensamble]+=(parseFloat(d.Comentario)||0.5);});
+  const objs=window.OBJETIVOS||{};
+  const ensArr=[...new Set([...Object.keys(porEns),...Object.keys(objs)])];
+  const maxV=Math.max(...ensArr.map(e=>Math.max(porEns[e]||0,objs[e]||0)),1);
+
+  let bV='<div class="vertical-chart-wrap"><div class="vertical-chart">';
+  ensArr.forEach(en=>{
+    const real=porEns[en]||0, obj=objs[en]||0;
+    const hR=Math.round((real/maxV)*150), hO=Math.round((obj/maxV)*150);
+    const pct=obj>0?Math.round((real/obj)*100):0;
+    const col=pct>=100?'var(--green)':pct>=70?'var(--warning)':'var(--red)';
+    bV+=`<div class="v-group">
+      <div class="v-bars">
+        <div class="v-bar real" style="height:${hR}px"><span class="v-bar-val">${real}</span></div>
+        <div class="v-bar objetivo" style="height:${hO}px"><span class="v-bar-val dim">${obj}</span></div>
+      </div>
+      <div class="v-label">${en}</div>
+      <div class="v-pct" style="color:${col}">${pct}%</div>
+    </div>`;
+  });
+  bV+=`</div><div class="chart-legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Real</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(0,230,118,.2);border:1px dashed rgba(0,230,118,.5)"></div>Objetivo</div>
+  </div></div>`;
+
+  // Barras horizontales por tipo de paro
+  const porTipo={};
+  paros.forEach(d=>{const k=d['Motivo del tema']||d.Tema;if(!porTipo[k])porTipo[k]=0;porTipo[k]+=getDur(d);});
+  const maxP=Math.max(...Object.values(porTipo),1);
+  let bH='<div class="bar-chart">';
+  Object.entries(porTipo).sort((a,b)=>b[1]-a[1]).forEach(([tipo,ms])=>{
+    bH+=`<div class="bar-row">
+      <div class="bar-name">${tipo}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(ms/maxP)*100}%;background:linear-gradient(90deg,#c62828,#ff5252)">
+        <span class="bar-fill-label">${fmtDur(ms)}</span></div></div>
+      <div class="bar-val">${fmtDur(ms)}</div>
+    </div>`;
+  });
+  bH+='</div>';
+
+  document.getElementById('chartsGrid').innerHTML=`
+    <div class="chart-card"><div class="chart-title">Carsets por ensamble — Real vs Objetivo</div>${ensArr.length?bV:'<div class="empty-state" style="padding:20px">Sin liberaciones hoy</div>'}</div>
+    <div class="chart-card"><div class="chart-title">Tiempo perdido por tipo de paro</div>${Object.keys(porTipo).length?bH:'<div class="empty-state" style="padding:20px">Sin paros hoy</div>'}</div>`;
+
+  // Tabla paros
+  const tbody=document.getElementById('parosBody');
+  tbody.innerHTML=paros.length
+    ? paros.map(r=>`<tr>
+        <td>${fmtTime(r['Hora de inicio'])}</td>
+        <td>${fmtTime(r['Hora final'])}</td>
+        <td>${r.Ensamble}</td>
+        <td><span class="badge ${r.Tema==='Comedor'?'badge-comedor':'badge-paro'}">${r['Motivo del tema']}</span></td>
+        <td style="color:var(--text-dim)">${r.Comentario&&r.Comentario!=='NA'?r.Comentario:'—'}</td>
+        <td style="color:var(--accent)">${fmtDur(getDur(r))}</td>
+      </tr>`).join('')
+    : '<tr><td colspan="6" style="text-align:center;color:var(--text-dim);padding:24px">Sin paros hoy</td></tr>';
+}
+
+// ══════════════════════════════════════════════════════════════
+// HISTORIAL
+// ══════════════════════════════════════════════════════════════
+function loadHistorial() {
+  const from=document.getElementById('dateFrom').value;
+  const to  =document.getElementById('dateTo').value;
+  const proy=document.getElementById('histProyecto').value;
+  if(!from||!to){document.getElementById('historialTable').innerHTML='<div class="empty-state">Selecciona un rango de fechas</div>';return;}
+  const fD=new Date(from), tD=new Date(to); tD.setHours(23,59,59);
+  const d=allData.filter(r=>{const f=new Date(r.Fecha);return f>=fD&&f<=tD&&(!proy||r.Proyecto===proy);});
+  renderHistorial(d);
+}
+
+function renderHistorial(data) {
+  const cont=document.getElementById('historialTable');
+  if(!data||!data.length){cont.innerHTML='<div class="empty-state">Sin datos en el rango seleccionado</div>';return;}
+  const byK={};
+  data.forEach(d=>{
+    const fecha=d.Fecha?d.Fecha.split('T')[0]:'Sin fecha';
+    const k=`${fecha}|${d.Proyecto}|${d.Ensamble}`;
+    if(!byK[k]) byK[k]={fecha,proyecto:d.Proyecto,ensamble:d.Ensamble,rows:[]};
+    byK[k].rows.push(d);
+  });
+  let html='<table><thead><tr><th>Fecha</th><th>Proyecto</th><th>Ensamble</th><th>Piezas</th><th>Carsets</th><th>Paros</th><th>T. Producción</th><th>T. Paros</th><th>Eficiencia</th></tr></thead><tbody>';
+  Object.values(byK).sort((a,b)=>b.fecha.localeCompare(a.fecha)).forEach(({fecha,proyecto,ensamble,rows})=>{
+    const libs=rows.filter(r=>r.Tema==='Liberacion');
+    const paros=rows.filter(r=>isParo(r.Tema));
+    const tP=rows.filter(r=>!isParo(r.Tema)).reduce((s,r)=>s+getDur(r),0);
+    const tPa=paros.reduce((s,r)=>s+getDur(r),0);
+    const cs=getCS(rows);
+    const ef=tP+tPa>0?Math.round(tP/(tP+tPa)*100):0;
+    const ec=ef>=70?'var(--green)':ef>=50?'var(--warning)':'var(--red)';
+    html+=`<tr><td>${fecha}</td><td>${proyecto}</td><td>${ensamble}</td>
+      <td><span class="badge badge-liberacion">${libs.length}</span></td>
+      <td style="color:var(--green)">${cs}</td>
+      <td><span class="badge badge-paro">${paros.length}</span></td>
+      <td style="color:var(--green)">${fmtDur(tP)}</td>
+      <td style="color:var(--red)">${fmtDur(tPa)}</td>
+      <td style="color:${ec}">${ef}%</td></tr>`;
+  });
+  html+='</tbody></table>';
+  cont.innerHTML=html;
+}
+
+// ══════════════════════════════════════════════════════════════
+// TABS + RELOJ + INIT
+// ══════════════════════════════════════════════════════════════
+function switchTab(i) {
+  activeTab=i;
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  document.querySelectorAll('.screen').forEach((s,j)=>s.classList.toggle('active',i===j));
+  if(i===0) renderTimeline();
+  if(i===1) renderResumen();
+}
+
+setInterval(()=>document.getElementById('headerTime').textContent=new Date().toLocaleTimeString('es-MX'),1000);
+
+function init() {
+  const hoy=new Date().toISOString().split('T')[0];
+  const semana=new Date(Date.now()-7*86400000).toISOString().split('T')[0];
+  document.getElementById('dateFrom').value=semana;
+  document.getElementById('dateTo').value=hoy;
+  loadData();
+  setInterval(loadData, CONFIG.refreshMs);
+}
+
+init();
+</script>
+</body>
+</html>

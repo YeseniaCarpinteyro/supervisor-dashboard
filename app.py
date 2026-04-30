@@ -13,17 +13,31 @@ DATOS = [
     {
         "ID": 1,
         "Fecha": "2026-04-28",
-        "Hora de inicio": "2026-04-28T07:00:00",
-        "Hora final": "2026-04-28T08:30:00",
+        "Hora de inicio": "2026-04-28T06:10:00",
+        "Hora final": "2026-04-28T06:28:00",
         "Proyecto": "Gondola Mill",
         "Ensamble": "Stub Sill",
         "Nave": "Nave 1",
         "Lote": "R42455",
+        "Tema": "Paro",
+        "Motivo del tema": "SEGURIDAD",
+        "Comentario": "Platica de 5 minutos",
+        "Pieza ID": "79216f5b-5810-4930-88ef-9a03aea2eefb"
+    },
+    {
+        "ID": 2,
+        "Fecha": "2026-04-28",
+        "Hora de inicio": "2026-04-28T06:43:00",
+        "Hora final": "2026-04-28T08:28:00",
+        "Proyecto": "FlatCar",
+        "Ensamble": "Bolster",
+        "Nave": "Nave 1",
+        "Lote": "R42420",
         "Tema": "Liberacion",
         "Motivo del tema": "Normal",
-        "Comentario": "1",
-        "Pieza ID": "PIEZA-0001"
-    }
+        "Comentario": "0.5",
+        "Pieza ID": "0ebe89e9-72eb-46af-9635-72c90b6ac464"
+    },
 ]
 
 # 🔹 API

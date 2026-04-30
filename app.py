@@ -13,8 +13,8 @@ DATOS = [
     {
         "ID": 1,
         "Fecha": "2026-04-28",
-        "Hora de inicio": "2026-04-28T06:10:00",
-        "Hora final": "2026-04-28T06:28:00",
+        "Hora de inicio": "2026-04-28T07:10:00",
+        "Hora final": "2026-04-28T07:28:00",
         "Proyecto": "Gondola Mill",
         "Ensamble": "Stub Sill",
         "Nave": "Nave 1",
@@ -27,8 +27,8 @@ DATOS = [
     {
         "ID": 2,
         "Fecha": "2026-04-28",
-        "Hora de inicio": "2026-04-28T06:43:00",
-        "Hora final": "2026-04-28T08:28:00",
+        "Hora de inicio": "2026-04-28T10:43:00",
+        "Hora final": "2026-04-28T10:28:00",
         "Proyecto": "FlatCar",
         "Ensamble": "Bolster",
         "Nave": "Nave 1",

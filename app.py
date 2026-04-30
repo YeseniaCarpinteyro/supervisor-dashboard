@@ -485,10 +485,24 @@ DATOS=[
         "Tema": "Paro",
         "Motivo del tema": "SEGURIDAD",
         "Comentario": "Platica de 5 Minutos",
-        "Pieza ID": "d9fe9f4f-f636-44a4-9de7-97f5ed60d378"
+        "Pieza ID": "de9fe9f4-f636-44a4-9de7-97f5ed60d378"
       },
       {
         "ID": 35,
+        "Fecha": "2026-04-30",
+        "Hora de inicio": "2026-04-30T06:29:00",
+        "Hora final": "2026-04-30T07:20:00",
+        "Proyecto": "Gondola Mill",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 1",
+        "Lote": "R42455",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "24cfb562-5efa-4bcf-b9c0-41f9249f18f0"
+      },
+      {
+        "ID": 36,
         "Fecha": "2026-04-30",
         "Hora de inicio": "2026-04-30T07:20:00",
         "Hora final": "2026-04-30T08:13:00",
@@ -501,8 +515,22 @@ DATOS=[
         "Comentario": "0.5",
         "Pieza ID": "f9c9deb2-4083-425b-87a9-624ab572ea72"
       },
+       {
+        "ID": 37,
+        "Fecha": "2026-04-30",
+        "Hora de inicio": "2026-04-30T06:30:00",
+        "Hora final": "2026-04-30T08:30:00",
+        "Proyecto": "FlatCar",
+        "Ensamble": "Bolster",
+        "Nave": "Nave 1",
+        "Lote": "R42420",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "de9fe9f4-f636-44a4-9de7-97f5ed60d378"
+      },
       {
-        "ID": 36,
+        "ID": 38,
         "Fecha": "2026-04-30",
         "Hora de inicio": "2026-04-30T06:33:00",
         "Hora final": "2026-04-30T08:34:00",
@@ -516,7 +544,7 @@ DATOS=[
         "Pieza ID": "b3028546-f2d4-4886-9923-ff8af111662f"
       },
       {
-        "ID": 37,
+        "ID": 39,
         "Fecha": "2026-04-30",
         "Hora de inicio": "2026-04-30T08:13:00",
         "Hora final": "2026-04-30T09:17:00",
@@ -530,7 +558,7 @@ DATOS=[
         "Pieza ID": "789493cd-1eda-4366-b6c7-075fa6614cf2"
       },
       {
-        "ID": 38,
+        "ID": 40,
         "Fecha": "2026-04-30",
         "Hora de inicio": "2026-04-30T09:18:00",
         "Hora final": "2026-04-30T10:38:00",
@@ -544,7 +572,7 @@ DATOS=[
         "Pieza ID": "9a25668c-0102-44b0-86b9-280994088cac"
       },
       {
-        "ID": 39,
+        "ID": 41,
         "Fecha": "2026-04-30",
         "Hora de inicio": "2026-04-30T08:30:00",
         "Hora final": "2026-04-30T10:39:00",

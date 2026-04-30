@@ -274,17 +274,12 @@ input[type="date"]:focus { border-color:var(--accent); }
 <!-- HEADER -->
 <header>
   <div class="logo-area">
-    <!--
-      🖼️ LOGO: Cambia "logo.png" por el nombre de tu archivo.
-      Debe estar en la MISMA CARPETA que este HTML.
-      Ejemplo: <img src="logo_concarril.png" class="logo-img" alt="Logo">
-    -->
+   
     <img src="logo.png" class="logo-img" alt="Logo"
-         onerror="this.style.display='none';document.getElementById('logoFB').style.display='flex'">
-    <div id="logoFB" class="logo-fallback" style="display:none">GB</div>
+         </div>
     <div>
       <div class="logo-text">LÍNEA ACTIVA</div>
-      <div class="logo-sub">Dashboard Supervisor</div>
+      <div class="logo-sub">DASHBOARD SUPERVISOR</div>
     </div>
   </div>
   <div class="header-right">
@@ -304,13 +299,8 @@ input[type="date"]:focus { border-color:var(--accent); }
 
   <!-- SCREEN 1: LÍNEA DE TIEMPO -->
   <div class="screen active" id="screen0">
-    <div class="config-banner">
-      <span>⚙️</span>
-      <div>
-        <strong>Modo de prueba:</strong> Mostrando datos de ejemplo. 
-        Cuando se configure la conexión con SharePoint, los datos reales aparecerán aquí automáticamente.
-        La página se actualiza cada <strong>15 segundos</strong>.
-      </div>
+    <div class=" ">
+    
     </div>
     <div class="filters-bar">
       <div class="filter-group">
@@ -322,7 +312,7 @@ input[type="date"]:focus { border-color:var(--accent); }
       <div class="timeline-header">
         <div class="timeline-title">Producción del día — 07:00 a 16:00</div>
         <div class="timeline-legend">
-          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Producción (misma pieza = mismo color)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Producción</div>
           <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Paro</div>
           <div class="legend-item"><div class="legend-dot" style="background:var(--warning)"></div>Comedor</div>
         </div>
@@ -384,7 +374,9 @@ input[type="date"]:focus { border-color:var(--accent); }
 // 🔧 CONFIGURACIÓN
 // ══════════════════════════════════════════════════════════════
 const CONFIG = {
-  backendUrl:  'https://supervisor-backend-z81u.onrender.com/datos',
+  siteUrl:     'https://thegreenbriercompanies.sharepoint.com/sites/GBRX/GMO/Concarril/areas/Operaciones',
+  listName:    'Avance de produccin',
+  accessToken: 'TU_TOKEN_AQUI',
   refreshMs:   15000
 };
 
@@ -491,14 +483,19 @@ const getCS   = rs => rs.filter(r=>r.Tema==='Liberacion').reduce((s,r)=>s+(parse
 // ══════════════════════════════════════════════════════════════
 async function loadData() {
   try {
-    const res = await fetch('https://supervisor-backend-z81u.onrender.com/datos');
-    if (!res.ok) throw new Error();
+    const res = await fetch('/datos');
+    if (!res.ok) throw new Error("Error en backend");
+
     allData = await res.json();
-  } catch(e) {
-    allData = sampleData();
+
+  } catch (e) {
+    console.error("Error cargando datos:", e);
+    allData = [];
   }
+
   processData();
 }
+
 function processData() {
   const proyectos = [...new Set(allData.map(d=>d.Proyecto).filter(Boolean))];
   ['filterProyecto','filterProyecto2','histProyecto'].forEach(sid => {
@@ -805,7 +802,7 @@ function init() {
   document.getElementById('dateFrom').value=semana;
   document.getElementById('dateTo').value=hoy;
   loadData();
-  setInterval(loadData, CONFIG.refreshMs);
+
 }
 
 init();

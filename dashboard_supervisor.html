@@ -425,7 +425,17 @@ const fmtDur  = ms => { if(!ms||isNaN(ms)||ms<0)return'0s'; const h=Math.floor(m
 const getDur  = r  => { const s=adjTZ(r['Hora de inicio']),e=adjTZ(r['Hora final']); return(!s||!e)?0:Math.max(0,e-s); };
 const isParo  = t  => t==='Paro'||t==='Comedor';
 const getCS   = rs => rs.filter(r=>r.Tema==='Liberacion').reduce((s,r)=>s+(parseFloat(r.Comentario)||0.5),0);
+function getCSHastaAhora(rows) {
+  const ahora = new Date();
 
+  return rows
+    .filter(r => {
+      const tema = (r.Tema || '').trim().toUpperCase();
+      const fin = adjTZ(r['Hora final']);
+      return tema === 'LIBERACION' && fin && fin <= ahora;
+    })
+    .reduce((s, r) => s + (parseFloat(r.Comentario) || 0.5), 0);
+}
 function esHoy(fechaISO) {
   if (!fechaISO) return false;
 
@@ -519,9 +529,17 @@ function renderTimeline() {
   html+='</div>';
 
   Object.values(grupos).forEach(g=>{
-    html+=`<div class="timeline-row">
-      <div class="row-label">${g.ensamble}<br><span class="row-label-sub">${g.proyecto}</span></div>
-      <div class="row-track">`;
+    const csActual = getCSHastaAhora(g.rows);
+
+	html+=`<div class="timeline-row">
+	  <div class="row-label">
+	    ${g.ensamble}
+	    <div style="font-size:11px;color:var(--accent);font-weight:bold;">
+	      ${csActual.toFixed(1)} CS
+	    </div>
+	    <span class="row-label-sub">${g.proyecto}</span>
+	  </div>
+	  <div class="row-track">`;
 
     g.rows.forEach(row=>{
       const s=adjTZ(row['Hora de inicio']), e=adjTZ(row['Hora final']);

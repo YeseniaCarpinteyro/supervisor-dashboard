@@ -428,9 +428,15 @@ const getCS   = rs => rs.filter(r=>r.Tema==='Liberacion').reduce((s,r)=>s+(parse
 
 function esHoy(fechaISO) {
   if (!fechaISO) return false;
+
   const f = new Date(fechaISO);
   const hoy = new Date();
-  return f.toDateString() === hoy.toDateString();
+
+  return (
+    f.getFullYear() === hoy.getFullYear() &&
+    f.getMonth() === hoy.getMonth() &&
+    f.getDate() === hoy.getDate()
+  );
 }
 // ══════════════════════════════════════════════════════════════
 // CARGA

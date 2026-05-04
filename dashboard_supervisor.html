@@ -275,7 +275,7 @@ input[type="date"]:focus { border-color:var(--accent); }
 <header>
   <div class="logo-area">
    
-    <img src="logo.png" class="logo-img" alt="Logo"
+    <img src="logo.png" class="logo-img" alt="Logo">
          </div>
     <div>
       <div class="logo-text">LÍNEA ACTIVA</div>
@@ -310,6 +310,7 @@ input[type="date"]:focus { border-color:var(--accent); }
     </div>
     <div class="timeline-container">
       <div class="timeline-header">
+	<div id="contadorPiezas" style="font-size:13px;color:var(--accent);font-weight:bold;"></div>
         <div class="timeline-title">Producción del día — 07:00 a 16:00</div>
         <div class="timeline-legend">
           <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Producción</div>
@@ -411,7 +412,6 @@ const PAROS = {
 // DATOS DE PRUEBA
 // ══════════════════════════════════════════════════════════════
 
-
 // ══════════════════════════════════════════════════════════════
 // ESTADO
 // ══════════════════════════════════════════════════════════════
@@ -426,6 +426,12 @@ const getDur  = r  => { const s=adjTZ(r['Hora de inicio']),e=adjTZ(r['Hora final
 const isParo  = t  => t==='Paro'||t==='Comedor';
 const getCS   = rs => rs.filter(r=>r.Tema==='Liberacion').reduce((s,r)=>s+(parseFloat(r.Comentario)||0.5),0);
 
+function esHoy(fechaISO) {
+  if (!fechaISO) return false;
+  const f = new Date(fechaISO);
+  const hoy = new Date();
+  return f.toDateString() === hoy.toDateString();
+}
 // ══════════════════════════════════════════════════════════════
 // CARGA
 // ══════════════════════════════════════════════════════════════
@@ -445,7 +451,11 @@ async function loadData() {
 }
 
 function processData() {
-  const proyectos = [...new Set(allData.map(d=>d.Proyecto).filter(Boolean))];
+   const proyectos = [...new Set(
+  allData
+    .map(d => (d.Proyecto || '').trim())
+    .filter(Boolean)
+)];
   ['filterProyecto','filterProyecto2','histProyecto'].forEach(sid => {
     const sel=document.getElementById(sid); if(!sel)return;
     const prev=sel.value;
@@ -456,16 +466,28 @@ function processData() {
 }
 
 function applyFilters() {
-  const p=document.getElementById('filterProyecto').value;
-  filteredData=allData.filter(d=>!p||d.Proyecto===p);
-  if(activeTab===0) renderTimeline();
+  const p = document.getElementById('filterProyecto').value;
+
+  filteredData = allData.filter(d =>
+    esHoy(d.Fecha) &&
+    (!p || (d.Proyecto || '').trim() === p)
+  );
+
+  if (activeTab === 0) renderTimeline();
 }
 
 function applyFilters2() {
-  const sel=document.getElementById('filterProyecto2'); if(!sel)return;
-  const p=sel.value;
-  filteredData2=allData.filter(d=>!p||d.Proyecto===p);
-  if(activeTab===1) renderResumen();
+  const sel = document.getElementById('filterProyecto2');
+  if (!sel) return;
+
+  const p = sel.value;
+
+  filteredData2 = allData.filter(d =>
+    esHoy(d.Fecha) &&
+    (!p || (d.Proyecto || '').trim() === p)
+  );
+
+  if (activeTab === 1) renderResumen();
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -529,6 +551,22 @@ function clickBlock(pid, rows) {
   if(selectedPID===pid){selectedPID=null;renderTimeline();closeDetail();return;}
   selectedPID=pid; renderTimeline(); showDetail(pid,rows);
 }
+function actualizarContadorPiezas() {
+  const ahora = new Date();
+
+  const piezas = filteredData.filter(d =>
+    d.Tema === 'Liberacion' &&
+    adjTZ(d['Hora final']) <= ahora
+  );
+
+  const total = piezas.length;
+
+  const el = document.getElementById('contadorPiezas');
+  if (el) {
+    el.innerHTML = `Piezas liberadas al momento: ${total}`;
+  }
+}
+actualizarContadorPiezas();
 
 // ══════════════════════════════════════════════════════════════
 // TOOLTIP

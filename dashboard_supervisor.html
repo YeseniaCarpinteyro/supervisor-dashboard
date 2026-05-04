@@ -449,13 +449,17 @@ async function loadData() {
 
   processData();
 }
-
 function processData() {
-   const proyectos = [...new Set(
-  allData
-    .map(d => (d.Proyecto || '').trim())
-    .filter(Boolean)
-)];
+  allData = allData.map(d => ({
+    ...d,
+    Proyecto: (d.Proyecto || '').trim().toUpperCase(),
+    Ensamble: (d.Ensamble || '').trim().toUpperCase()
+  }));
+
+
+  const proyectos = [...new Set(
+    allData.map(d => d.Proyecto).filter(Boolean)
+  )];
   ['filterProyecto','filterProyecto2','histProyecto'].forEach(sid => {
     const sel=document.getElementById(sid); if(!sel)return;
     const prev=sel.value;
@@ -734,7 +738,7 @@ function loadHistorial() {
   const proy=document.getElementById('histProyecto').value;
   if(!from||!to){document.getElementById('historialTable').innerHTML='<div class="empty-state">Selecciona un rango de fechas</div>';return;}
   const fD=new Date(from), tD=new Date(to); tD.setHours(23,59,59);
-  const d=allData.filter(r=>{const f=new Date(r.Fecha);return f>=fD&&f<=tD&&(!proy||r.Proyecto===proy);});
+  const d=allData.filter(r=>{const f = adjTZ(r['Hora de inicio']);return f>=fD&&f<=tD&&(!proy||r.Proyecto===proy);});
   renderHistorial(d);
 }
 
@@ -742,23 +746,44 @@ function renderHistorial(data) {
   const cont=document.getElementById('historialTable');
   if(!data||!data.length){cont.innerHTML='<div class="empty-state">Sin datos en el rango seleccionado</div>';return;}
   const byK={};
-  data.forEach(d=>{
-    const fecha=d.Fecha?d.Fecha.split('T')[0]:'Sin fecha';
-    const k=`${fecha}|${d.Proyecto}|${d.Ensamble}`;
-    if(!byK[k]) byK[k]={fecha,proyecto:d.Proyecto,ensamble:d.Ensamble,rows:[]};
-    byK[k].rows.push(d);
-  });
+  data.forEach(d => {
+  const fecha = d.Fecha ? d.Fecha.split('T')[0] : 'Sin fecha';
+
+  const proyecto = (d.Proyecto || '').trim().toUpperCase();
+  const ensamble = (d.Ensamble || '').trim().toUpperCase();
+
+  const k = `${fecha}|${proyecto}|${ensamble}`;
+
+  if (!byK[k]) {
+    byK[k] = {
+      fecha,
+      proyecto,
+      ensamble,
+      rows: []
+    };
+  }
+
+  byK[k].rows.push(d);
+});
   let html='<table><thead><tr><th>Fecha</th><th>Proyecto</th><th>Ensamble</th><th>Piezas</th><th>Carsets</th><th>Paros</th><th>T. Producción</th><th>T. Paros</th><th>Eficiencia</th></tr></thead><tbody>';
   Object.values(byK).sort((a,b)=>b.fecha.localeCompare(a.fecha)).forEach(({fecha,proyecto,ensamble,rows})=>{
-    const libs=rows.filter(r=>r.Tema==='Liberacion');
+    const piezasUnicas = [...new Set(
+  rows
+    .filter(r => r.Tema === 'Liberacion')
+    .map(r => r['Pieza ID'])
+)];
+
+const libs = piezasUnicas.length;
     const paros=rows.filter(r=>isParo(r.Tema));
-    const tP=rows.filter(r=>!isParo(r.Tema)).reduce((s,r)=>s+getDur(r),0);
+    const tP = rows
+  .filter(r => r.Tema === 'Normal')
+  .reduce((s, r) => s + getDur(r), 0);
     const tPa=paros.reduce((s,r)=>s+getDur(r),0);
     const cs=getCS(rows);
     const ef=tP+tPa>0?Math.round(tP/(tP+tPa)*100):0;
     const ec=ef>=70?'var(--green)':ef>=50?'var(--warning)':'var(--red)';
     html+=`<tr><td>${fecha}</td><td>${proyecto}</td><td>${ensamble}</td>
-      <td><span class="badge badge-liberacion">${libs.length}</span></td>
+      <td><span class="badge badge-liberacion">${libs}</span></td>
       <td style="color:var(--green)">${cs}</td>
       <td><span class="badge badge-paro">${paros.length}</span></td>
       <td style="color:var(--green)">${fmtDur(tP)}</td>

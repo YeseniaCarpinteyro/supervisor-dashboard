@@ -410,59 +410,7 @@ const PAROS = {
 // ══════════════════════════════════════════════════════════════
 // DATOS DE PRUEBA
 // ══════════════════════════════════════════════════════════════
-function sampleData() {
-  const today = new Date(); today.setHours(0,0,0,0);
-  const rows  = [];
-  let id = 1;
 
-  const ens = [
-    { proyecto:'Gondola Mill', ensamble:'Stub Sill',  nave:'Nave 1', lote:'R42455' },
-    { proyecto:'Gondola Mill', ensamble:'Frentes',    nave:'Nave 2', lote:'R42455' },
-    { proyecto:'Flat Car',     ensamble:'Bolster',    nave:'Nave 3', lote:'R42420' },
-    { proyecto:'Flat Car',     ensamble:'Side Sill',  nave:'Nave 4', lote:'R42420' },
-  ];
-
-  window.OBJETIVOS = { 'Stub Sill':4, 'Frentes':3, 'Bolster':5, 'Side Sill':4 };
-  const tipos = Object.keys(PAROS);
-
-  ens.forEach(e => {
-    let t = new Date(today.getTime() + H_INI * 3600000);
-    for (let p = 0; p < 4; p++) {
-      const pid  = `PIEZA-${String(id).padStart(4,'0')}`;
-      const dur1 = 900000 + Math.random()*3600000;
-      const fin1 = new Date(t.getTime() + dur1);
-      if (fin1.getHours() >= H_FIN) break;
-
-      if (Math.random() > 0.3) {
-        // Normal → Paro → Liberacion
-        rows.push({ ID:id++, Fecha:today.toISOString(), 'Hora de inicio':t.toISOString(), 'Hora final':fin1.toISOString(), Proyecto:e.proyecto, Ensamble:e.ensamble, Nave:e.nave, Lote:e.lote, Tema:'Normal', 'Motivo del tema':'Normal', Comentario:'NA', 'Pieza ID':pid });
-
-        const esComedor = Math.random() > 0.6;
-        const tipo      = esComedor ? 'COMEDOR' : tipos[Math.floor(Math.random()*tipos.length)];
-        const motivos   = esComedor ? ['Comedor'] : PAROS[tipo];
-        const motivo    = motivos[Math.floor(Math.random()*motivos.length)];
-        const durParo   = 300000 + Math.random()*1800000;
-        const finParo   = new Date(fin1.getTime() + durParo);
-
-        rows.push({ ID:id++, Fecha:today.toISOString(), 'Hora de inicio':fin1.toISOString(), 'Hora final':finParo.toISOString(), Proyecto:e.proyecto, Ensamble:e.ensamble, Nave:e.nave, Lote:e.lote, Tema:esComedor?'Comedor':'Paro', 'Motivo del tema':tipo, Comentario:motivo, 'Pieza ID':'' });
-
-        const dur2 = 900000 + Math.random()*3600000;
-        const fin2 = new Date(finParo.getTime() + dur2);
-        if (fin2.getHours() < H_FIN) {
-          const cs = Math.random() > 0.4 ? '1' : '0.5';
-          rows.push({ ID:id++, Fecha:today.toISOString(), 'Hora de inicio':finParo.toISOString(), 'Hora final':fin2.toISOString(), Proyecto:e.proyecto, Ensamble:e.ensamble, Nave:e.nave, Lote:e.lote, Tema:'Liberacion', 'Motivo del tema':'Normal', Comentario:cs, 'Pieza ID':pid });
-          t = fin2;
-        } else break;
-      } else {
-        // Solo Liberacion
-        const cs = Math.random() > 0.4 ? '1' : '0.5';
-        rows.push({ ID:id++, Fecha:today.toISOString(), 'Hora de inicio':t.toISOString(), 'Hora final':fin1.toISOString(), Proyecto:e.proyecto, Ensamble:e.ensamble, Nave:e.nave, Lote:e.lote, Tema:'Liberacion', 'Motivo del tema':'Normal', Comentario:cs, 'Pieza ID':pid });
-        t = fin1;
-      }
-    }
-  });
-  return rows;
-}
 
 // ══════════════════════════════════════════════════════════════
 // ESTADO

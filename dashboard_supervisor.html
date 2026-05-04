@@ -574,22 +574,7 @@ function clickBlock(pid, rows) {
   if(selectedPID===pid){selectedPID=null;renderTimeline();closeDetail();return;}
   selectedPID=pid; renderTimeline(); showDetail(pid,rows);
 }
-function actualizarContadorPiezas() {
-  const ahora = new Date();
 
-  const piezas = filteredData.filter(d =>
-    d.Tema === 'Liberacion' &&
-    adjTZ(d['Hora final']) <= ahora
-  );
-
-  const total = piezas.length;
-
-  const el = document.getElementById('contadorPiezas');
-  if (el) {
-    el.innerHTML = `Piezas liberadas al momento: ${total}`;
-  }
-}
-actualizarContadorPiezas();
 
 // ══════════════════════════════════════════════════════════════
 // TOOLTIP

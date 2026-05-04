@@ -776,7 +776,10 @@ function renderHistorial(data) {
 const libs = piezasUnicas.length;
     const paros=rows.filter(r=>isParo(r.Tema));
     const tP = rows
-  .filter(r => r.Tema === 'Normal')
+  .filter(r => {
+    const tema = (r.Tema || '').trim().toUpperCase();
+    return tema === 'NORMAL' || tema === 'LIBERACION';
+  })
   .reduce((s, r) => s + getDur(r), 0);
     const tPa=paros.reduce((s,r)=>s+getDur(r),0);
     const cs=getCS(rows);

@@ -850,7 +850,49 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "0.5",
         "Pieza ID": "770a8787-23f3-4d93-a05b-032b0e0ca80a"
-      }
+      },
+      {
+        "ID": 61,
+        "Fecha": "2026-05-05",
+        "Hora de inicio": "2026-05-05T06:00:00",
+        "Hora final": "2026-05-05T06:10:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Paro",
+        "Motivo del tema": "SEGURIDAD",
+        "Comentario": "Platica de 5 Minutos",
+        "Pieza ID": "ceb3d0e3-50fe-46f9-b562-55dc96b943ca"
+      },
+      {
+        "ID": 62,
+        "Fecha": "2026-05-05",
+        "Hora de inicio": "2026-05-05T06:02:00",
+        "Hora final": "2026-05-05T06:24:00",
+        "Proyecto": "Gondola Mill",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 1",
+        "Lote": "R42455",
+        "Tema": "Paro",
+        "Motivo del tema": "SEGURIDAD",
+        "Comentario": "Platica de 5 Minutos",
+        "Pieza ID": "7935e299-73b5-45c5-b5f3-8cbe0f6a3888"
+      },
+      {
+        "ID": 63,
+        "Fecha": "2026-05-05",
+        "Hora de inicio": "2026-05-05T06:03:00",
+        "Hora final": "2026-05-05T06:36:00",
+        "Proyecto": "FlatCar",
+        "Ensamble": "Bolster",
+        "Nave": "Nave 1",
+        "Lote": "R42420",
+        "Tema": "Paro",
+        "Motivo del tema": "SEGURIDAD",
+        "Comentario": "Platica de 5 Minutos",
+        "Pieza ID": "50d52d2f-c36c-4987-a60d-a84e63cf2977"
+      },
 ]
 
 # 🔹 API

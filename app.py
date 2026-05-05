@@ -854,8 +854,8 @@ DATOS=[
       {
         "ID": 61,
         "Fecha": "2026-05-05",
-        "Hora de inicio": "2026-05-05T06:00:00",
-        "Hora final": "2026-05-05T06:10:00",
+        "Hora de inicio": "2026-05-05T06:02:00",
+        "Hora final": "2026-05-05T06:30:00",
         "Proyecto": "Gondola Iron Rotary",
         "Ensamble": "Stub sill",
         "Nave": "Nave 6",
@@ -868,8 +868,8 @@ DATOS=[
       {
         "ID": 62,
         "Fecha": "2026-05-05",
-        "Hora de inicio": "2026-05-05T06:02:00",
-        "Hora final": "2026-05-05T06:24:00",
+        "Hora de inicio": "2026-05-05T06:03:00",
+        "Hora final": "2026-05-05T06:52:00",
         "Proyecto": "Gondola Mill",
         "Ensamble": "Stub sill",
         "Nave": "Nave 1",
@@ -896,8 +896,8 @@ DATOS=[
       {
         "ID": 64,
         "Fecha": "2026-05-05",
-        "Hora de inicio": "2026-05-05T06:02:00",
-        "Hora final": "2026-05-05T06:24:00",
+        "Hora de inicio": "2026-05-05T06:52:00",
+        "Hora final": "2026-05-05T08:09:00",
         "Proyecto": "Gondola Mill",
         "Ensamble": "Stub sill",
         "Nave": "Nave 1",
@@ -911,7 +911,7 @@ DATOS=[
         "ID": 65,
         "Fecha": "2026-05-05",
         "Hora de inicio": "2026-05-05T06:03:00",
-        "Hora final": "2026-05-05T06:36:00",
+        "Hora final": "2026-05-05T08:22:00",
         "Proyecto": "FlatCar",
         "Ensamble": "Bolster",
         "Nave": "Nave 1",
@@ -924,8 +924,8 @@ DATOS=[
       {
         "ID": 66,
         "Fecha": "2026-05-05",
-        "Hora de inicio": "2026-05-05T06:00:00",
-        "Hora final": "2026-05-05T06:10:00",
+        "Hora de inicio": "2026-05-05T06:30:00",
+        "Hora final": "2026-05-05T08:34:00",
         "Proyecto": "Gondola Iron Rotary",
         "Ensamble": "Stub sill",
         "Nave": "Nave 6",
@@ -934,7 +934,35 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "0.5",
         "Pieza ID": "ceb3d0e3-50fe-46f9-b562-55dc96b943ca"
-      }
+      },
+      {
+        "ID": 67,
+        "Fecha": "2026-05-05",
+        "Hora de inicio": "2026-05-05T08:09:00",
+        "Hora final": "2026-05-05T09:12:00",
+        "Proyecto": "Gondola Mill",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 1",
+        "Lote": "R42455",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "51be5109-f69b-414e-a86f-b3a2db3dedba"
+      },
+      {
+        "ID": 68,
+        "Fecha": "2026-05-05",
+        "Hora de inicio": "2026-05-05T08:09:13",
+        "Hora final": "2026-05-05T10:23:00",
+        "Proyecto": "Gondola Mill",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 1",
+        "Lote": "R42455",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "71d851af-1960-46ae-a593-80a25392f027"
+      },
 ]
 
 # 🔹 API

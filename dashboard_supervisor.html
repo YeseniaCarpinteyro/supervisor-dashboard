@@ -682,8 +682,8 @@ function renderResumen() {
     const info = porPE[k] || { proyecto: k.split('||')[0], ensamble: k.split('||')[1], real:0 };
     const real = info.real;
     const obj  = OBJS[k] || OBJETIVO_DEFAULT;
-    const hR   = Math.round((real/maxV)*130);
-    const hO   = Math.round((obj/maxV)*130);
+    const hR   = Math.round((real/maxV)*95);
+    const hO   = Math.round((obj/maxV)*95);
     const pct  = obj>0 ? Math.round((real/obj)*100) : 0;
     const col  = pct>=100?'var(--green)':pct>=70?'var(--warning)':'var(--red)';
     bV += `<div class="v-group">

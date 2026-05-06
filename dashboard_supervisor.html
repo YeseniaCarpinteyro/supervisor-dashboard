@@ -682,19 +682,19 @@ function renderResumen() {
     const info = porPE[k] || { proyecto: k.split('||')[0], ensamble: k.split('||')[1], real:0 };
     const real = info.real;
     const obj  = OBJS[k] || OBJETIVO_DEFAULT;
-    const hR   = Math.round((real/maxV)*185);
-    const hO   = Math.round((obj/maxV)*185);
+    const hR   = Math.round((real/maxV)*130);
+    const hO   = Math.round((obj/maxV)*130);
     const pct  = obj>0 ? Math.round((real/obj)*100) : 0;
     const col  = pct>=100?'var(--green)':pct>=70?'var(--warning)':'var(--red)';
     bV += `<div class="v-group">
       <div class="v-project-label">${info.proyecto}</div>
       <div class="v-bars">
         <div style="position:relative">
-          <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;font-family:'Courier New',monospace;color:var(--accent);white-space:nowrap">${real%1===0?real.toFixed(0):real.toFixed(1)} CS</div>
+          <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;font-family:'Courier New',monospace;color:var(--accent);white-space:nowrap">${real%1===0?real.toFixed(0):real.toFixed(1)}</div>
           <div class="v-bar real" style="height:${hR}px"></div>
         </div>
         ${obj>0?`<div style="position:relative">
-        <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;font-family:'Courier New',monospace;color:var(--text-dim);white-space:nowrap">${obj} CS</div>
+        <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;font-family:'Courier New',monospace;color:var(--text-dim);white-space:nowrap">${obj}</div>
         <div class="v-bar objetivo" style="height:${hO}px"></div>
       </div>`:''}
       </div>

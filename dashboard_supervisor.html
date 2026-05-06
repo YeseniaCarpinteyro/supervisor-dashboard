@@ -443,8 +443,6 @@ function processData() {
 
 // ══════════════════════════════════════════════════════════════
 // LÍNEA DE TIEMPO
-// FIX 2: Carsets al lado del nombre, no abajo
-// FIX 3: Muestra datos del día aunque ya acabó la jornada
 // ══════════════════════════════════════════════════════════════
 function renderTimeline() {
   const grid = document.getElementById('timelineGrid');
@@ -475,7 +473,7 @@ function renderTimeline() {
   Object.values(grupos).forEach(g => {
     const csActual = getCSAhora(g.rows);
 
-    // FIX 2: Carsets en línea compacta al lado del ensamble
+    //Carsets en línea compacta al lado del ensamble
     html += `<div class="timeline-row">
       <div class="row-label">
         <div style="display:flex;align-items:baseline;gap:6px">
@@ -553,7 +551,6 @@ function hideTT() { document.getElementById('tooltip').classList.remove('visible
 
 // ══════════════════════════════════════════════════════════════
 // DETALLE PIEZA
-// FIX 6: Solo paros ENTRE inicio y fin de la pieza (no paros de inicio de jornada)
 // ══════════════════════════════════════════════════════════════
 function showDetail(pid, rows) {
   const panel   = document.getElementById('detailPanel');
@@ -564,18 +561,16 @@ function showDetail(pid, rows) {
   const prodRows = pRows.filter(r => !isParo(r.Tema));
   const tProd    = prodRows.reduce((s,r) => s+getDur(r), 0);
 
-  // FIX 6: Paros intermedios = entre el primer inicio y el último fin de la pieza
-  // Y que tengan Pieza ID vacío (son paros, no producción)
+
   const piezaInicioMs = Math.min(...prodRows.map(r => { const d=adjTZ(r['Hora de inicio']); return d?d.getTime():Infinity; }));
   const piezaFinMs    = Math.max(...prodRows.map(r => { const d=adjTZ(r['Hora final']);    return d?d.getTime():0; }));
 
   const parosI = rows.filter(r => {
-    if (r['Pieza ID']) return false; // tiene ID propio, no es paro intermedio
+    if (r['Pieza ID']) return false; 
     if (!isParo(r.Tema)) return false;
     const tI = adjTZ(r['Hora de inicio']);
     const tF = adjTZ(r['Hora final']);
     if (!tI||!tF) return false;
-    // FIX 6: El paro debe estar DENTRO del rango de la pieza
     return tI.getTime() >= piezaInicioMs && tF.getTime() <= piezaFinMs;
   });
 
@@ -628,8 +623,6 @@ function closeDetail() { document.getElementById('detailPanel').classList.remove
 
 // ══════════════════════════════════════════════════════════════
 // RESUMEN DEL DÍA
-// FIX 4: "Piezas" → "Carsets"
-// FIX 5: Gráfica por Proyecto+Ensamble para distinguir
 // ══════════════════════════════════════════════════════════════
 function renderResumen() {
   const data  = filteredData2;
@@ -640,7 +633,6 @@ function renderResumen() {
   const cs    = getCS(data);
   const ef    = tProd+tParo>0 ? Math.round(tProd/(tProd+tParo)*100) : 0;
 
-  // FIX 4: "Piezas" → "Carsets"
   document.getElementById('kpiGrid').innerHTML = `
     <div class="kpi-card green">
       <div class="kpi-label">Carsets completados</div>
@@ -663,7 +655,7 @@ function renderResumen() {
       <div class="kpi-sub">producción vs paros</div>
     </div>`;
 
-  // FIX 5: Gráfica vertical agrupada por Proyecto + Ensamble
+  //Gráfica vertical de los proyectos
   const porPE = {};
   libs.forEach(d => {
     const k = `${d.Proyecto}||${d.Ensamble}`;
@@ -671,7 +663,6 @@ function renderResumen() {
     porPE[k].real += (parseFloat(d.Comentario)||0.5);
   });
 
-  // Objetivos por proyecto+ensamble (puedes expandir este objeto)
   const OBJETIVO_DEFAULT = 5;
   const OBJS = window.OBJETIVOS_PE || {};
   const peArr = [...new Set([...Object.keys(porPE), ...Object.keys(OBJS)])];
@@ -753,8 +744,6 @@ function renderResumen() {
 
 // ══════════════════════════════════════════════════════════════
 // HISTORIAL
-// FIX 4: "Piezas" → "Carsets", quitar columna piezas
-// FIX 7: Botón "Ver día" abre mini cronograma
 // ══════════════════════════════════════════════════════════════
 function loadHistorial() {
   const from = document.getElementById('dateFrom').value;
@@ -783,7 +772,7 @@ function renderHistorial(data) {
     byK[k].rows.push(d);
   });
 
-  // FIX 4: Sin columna "Piezas", usar "Carsets"
+
   let html = '<table><thead><tr><th>Fecha</th><th>Proyecto</th><th>Ensamble</th><th>Carsets</th><th>Paros</th><th>T. Producción</th><th>T. Paros</th><th>Eficiencia</th><th></th></tr></thead><tbody>';
 
   Object.values(byK).sort((a,b) => b.fecha.localeCompare(a.fecha)).forEach(({fecha,proyecto,ensamble,rows}) => {
@@ -799,7 +788,7 @@ function renderHistorial(data) {
       <td>${fecha}</td>
       <td>${proyecto}</td>
       <td>${ensamble}</td>
-      <td><span class="badge badge-liberacion">${cs%1===0?cs.toFixed(0):cs.toFixed(1)} CS</span></td>
+      <td><span class="badge badge-liberacion">${cs%1===0?cs.toFixed(0):cs.toFixed(1)} </span></td>
       <td><span class="badge badge-paro">${paros.length}</span></td>
       <td style="color:var(--green)">${fmtDur(tP)}</td>
       <td style="color:var(--red)">${fmtDur(tPa)}</td>
@@ -812,8 +801,8 @@ function renderHistorial(data) {
   cont.innerHTML = html;
 }
 
-// FIX 7: Mini cronograma en modal
-function verDiaModal(titulo, rows) {
+  // Para mostrar el avance de esa pieza en el historial
+  function verDiaModal(titulo, rows) {
   document.getElementById('modalTitle').textContent = `Cronograma: ${titulo}`;
   const cont = document.getElementById('modalContent');
 
@@ -833,7 +822,6 @@ function verDiaModal(titulo, rows) {
   });
 
   let html = `<div style="overflow-x:auto"><div style="min-width:600px">`;
-  // Ruler
   html += `<div style="display:flex;margin-left:140px;border-bottom:1px solid var(--border);padding:6px 0 4px">`;
   const cur = new Date(tMin);
   while (cur <= tMax) {

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>filters
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -24,12 +24,9 @@ body { font-family:Arial,'Century Gothic',sans-serif; background:var(--bg); colo
 /* HEADER */
 header { display:flex; align-items:center; justify-content:space-between; padding:12px 32px; background:var(--surface); border-bottom:2px solid var(--accent); position:sticky; top:0; z-index:100; }
 .logo-area { display:flex; align-items:center; gap:14px; }
-/*
-  🖼️ LOGO: Cambia "logo.png" por el nombre de tu archivo.
-  Aumenté el tamaño a 60px para mejor calidad visual.
-*/
+
 .logo-img { height:60px; width:auto; object-fit:contain; }
-.logo-fallback { width:60px; height:60px; background:linear-gradient(135deg,#00e676,#00b050); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:800; color:#000; }
+
 .logo-text { font-size:18px; font-weight:700; color:var(--accent); }
 .logo-sub  { font-size:11px; color:var(--text-dim); letter-spacing:1.5px; text-transform:uppercase; }
 .header-right { display:flex; align-items:center; gap:20px; }
@@ -226,7 +223,7 @@ input[type="date"]:focus { border-color:var(--accent); }
 
     <img src="logo.png" class="logo-img" alt="Logo"
          onerror="this.style.display='none';document.getElementById('logoFB').style.display='flex'">
-    <div id="logoFB" class="logo-fallback" style="display:none"></div>
+ 
     <div>
       <div class="logo-text">LÍNEA ACTIVA</div>
       <div class="logo-sub">DASHBOARD SUPERVISOR</div>
@@ -275,6 +272,10 @@ input[type="date"]:focus { border-color:var(--accent); }
   <!-- SCREEN 2: RESUMEN -->
   <div class="screen" id="screen1">
     <div class="filters-bar">
+  <div class="filter-group">
+    <div class="filter-label">Fecha</div>
+    <input type="date" id="filterFecha2" onchange="applyFilters2()">
+      </div>
       <div class="filter-group">
         <div class="filter-label">Proyecto</div>
         <select id="filterProyecto2" onchange="applyFilters2()"><option value="">Todos</option></select>
@@ -283,7 +284,7 @@ input[type="date"]:focus { border-color:var(--accent); }
     <div class="kpi-grid" id="kpiGrid"><div class="loading"><div class="spinner"></div>Cargando...</div></div>
     <div class="charts-grid" id="chartsGrid"></div>
     <div class="chart-card">
-      <div class="chart-title">Paros registrados hoy</div>
+      <div class="chart-title" id="tituloParos">Paros registrados hoy</div>
       <div class="table-wrap">
         <table class="paros-table">
           <thead><tr><th>Hora inicio</th><th>Hora fin</th><th>Ensamble</th><th>Tipo de paro</th><th>Motivo específico</th><th>Duración</th></tr></thead>
@@ -428,11 +429,15 @@ function processData() {
   function applyFilters2() {
     const sel = document.getElementById('filterProyecto2'); if (!sel) return;
     const p = sel.value;
-    const hoy = getHoyLocal();
+    const fechaInput = document.getElementById('filterFecha2');
+    const fechaSel = fechaInput && fechaInput.value ? fechaInput.value : getHoyLocal();
     filteredData2 = allData.filter(d => {
       const fecha = d.Fecha ? d.Fecha.split('T')[0] : '';
-      return fecha === hoy && (!p || d.Proyecto===p);
+      return fecha === fechaSel && (!p || d.Proyecto===p);
     });
+    // Actualizar título de la sección de paros
+    const titulo = document.getElementById('tituloParos');
+    if (titulo) titulo.textContent = `Paros registrados — ${fechaSel}`;
     if (activeTab===1) renderResumen();
   }
 
@@ -786,12 +791,12 @@ function renderHistorial(data) {
       <td>${fecha}</td>
       <td>${proyecto}</td>
       <td>${ensamble}</td>
-      <td style="color:var(--green);font-weight:bold">${cs%1===0?cs.toFixed(0):cs.toFixed(1)}</td>
+      <td><span class="badge badge-liberacion">${cs%1===0?cs.toFixed(0):cs.toFixed(1)} CS</span></td>
       <td><span class="badge badge-paro">${paros.length}</span></td>
       <td style="color:var(--green)">${fmtDur(tP)}</td>
       <td style="color:var(--red)">${fmtDur(tPa)}</td>
       <td style="color:${ec}">${ef}%</td>
-      <td><button class="btn-ver-dia" onclick='verDiaModal("${fecha} — ${proyecto} / ${ensamble}",${rowsJ})'>Ver día</button></td>
+      <td><button class="btn-ver-dia" onclick='verDiaModal("${fecha} — ${proyecto} / ${ensamble}",${rowsJ})'>Ver más</button></td>
     </tr>`;
   });
 
@@ -848,6 +853,7 @@ function verDiaModal(titulo, rows) {
       let bg = 'linear-gradient(90deg,#00b050,#00e676)';
       if (tema==='Paro')    bg = 'linear-gradient(90deg,#c62828,#ff5252)';
       if (tema==='Comedor') bg = 'linear-gradient(90deg,#e65100,#ffab40)';
+      const csVal = tema==='Liberacion' ? ` · ${parseFloat(row.Comentario)||0.5} CS` : '';
       html += `<div title="${tema} — ${fmtDur(e-s)}" style="position:absolute;height:100%;left:${left}%;width:${width}%;background:${bg};border-radius:3px;min-width:2px"></div>`;
     });
 
@@ -902,6 +908,7 @@ function init() {
   const semanaStr = `${semana.getFullYear()}-${String(semana.getMonth()+1).padStart(2,'0')}-${String(semana.getDate()).padStart(2,'0')}`;
   document.getElementById('dateFrom').value = semanaStr;
   document.getElementById('dateTo').value   = hoy;
+  document.getElementById('filterFecha2').value = getHoyLocal();
   loadData();
   setInterval(loadData, REFRESH_MS);
 }

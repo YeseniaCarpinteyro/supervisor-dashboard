@@ -412,16 +412,22 @@ function processData() {
 
 function applyFilters() {
   const p = document.getElementById('filterProyecto').value;
-  // FIX 3: Solo mostrar datos de HOY en línea de tiempo
-  filteredData = allData.filter(d => esHoy(d.Fecha) && (!p || d.Proyecto===p));
+  const hoy = new Date().toISOString().split('T')[0];
+  filteredData = allData.filter(d => {
+    const fecha = d.Fecha ? d.Fecha.split('T')[0] : '';
+    return fecha === hoy && (!p || d.Proyecto===p);
+  });
   if (activeTab===0) renderTimeline();
 }
 
 function applyFilters2() {
   const sel = document.getElementById('filterProyecto2'); if (!sel) return;
   const p = sel.value;
-  // FIX 3: Solo mostrar datos de HOY en resumen
-  filteredData2 = allData.filter(d => esHoy(d.Fecha) && (!p || d.Proyecto===p));
+  const hoy = new Date().toISOString().split('T')[0];
+  filteredData2 = allData.filter(d => {
+    const fecha = d.Fecha ? d.Fecha.split('T')[0] : '';
+    return fecha === hoy && (!p || d.Proyecto===p);
+  });
   if (activeTab===1) renderResumen();
 }
 
@@ -439,7 +445,9 @@ function renderTimeline() {
 
   const hoy = new Date(); hoy.setHours(0,0,0,0);
   const tMin = new Date(hoy.getTime() + H_INI*3600000);
-  const tMax = new Date(hoy.getTime() + H_FIN*3600000);
+  const jornadaFin = new Date(hoy.getTime() + H_FIN*3600000);
+  const ultimoReg  = Math.max(...filteredData.map(d => { const e=adjTZ(d['Hora final']); return e?e.getTime():0; }));
+  const tMax = new Date(Math.max(jornadaFin.getTime(), ultimoReg));
   const span = tMax - tMin;
 
   // Agrupar por proyecto+ensamble

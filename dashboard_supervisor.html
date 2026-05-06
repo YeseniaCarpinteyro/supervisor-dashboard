@@ -689,8 +689,14 @@ function renderResumen() {
     bV += `<div class="v-group">
       <div class="v-project-label">${info.proyecto}</div>
       <div class="v-bars">
-        <div class="v-bar real" style="height:${hR}px"><span class="v-bar-val">${real%1===0?real.toFixed(0):real.toFixed(1)}</span></div>
-        ${obj>0?`<div class="v-bar objetivo" style="height:${hO}px"><span class="v-bar-val dim">${obj}</span></div>`:''}
+        <div style="position:relative">
+          <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;font-family:'Courier New',monospace;color:var(--accent);white-space:nowrap">${real%1===0?real.toFixed(0):real.toFixed(1)} CS</div>
+          <div class="v-bar real" style="height:${hR}px"></div>
+        </div>
+        ${obj>0?`<div style="position:relative">
+        <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;font-family:'Courier New',monospace;color:var(--text-dim);white-space:nowrap">${obj} CS</div>
+        <div class="v-bar objetivo" style="height:${hO}px"></div>
+      </div>`:''}
       </div>
       <div class="v-label">${info.ensamble}</div>
       <div style="font-size:9px;color:var(--accent);font-family:'Courier New',monospace;text-align:center;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${info.proyecto}</div>    

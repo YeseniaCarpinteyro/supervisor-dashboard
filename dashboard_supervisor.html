@@ -410,26 +410,31 @@ function processData() {
   applyFilters2();
 }
 
-function applyFilters() {
-  const p = document.getElementById('filterProyecto').value;
-  const hoy = new Date().toISOString().split('T')[0];
-  filteredData = allData.filter(d => {
-    const fecha = d.Fecha ? d.Fecha.split('T')[0] : '';
-    return fecha === hoy && (!p || d.Proyecto===p);
-  });
-  if (activeTab===0) renderTimeline();
-}
+  function getHoyLocal() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
 
-function applyFilters2() {
-  const sel = document.getElementById('filterProyecto2'); if (!sel) return;
-  const p = sel.value;
-  const hoy = new Date().toISOString().split('T')[0];
-  filteredData2 = allData.filter(d => {
-    const fecha = d.Fecha ? d.Fecha.split('T')[0] : '';
-    return fecha === hoy && (!p || d.Proyecto===p);
-  });
-  if (activeTab===1) renderResumen();
-}
+  function applyFilters() {
+    const p = document.getElementById('filterProyecto').value;
+    const hoy = getHoyLocal();
+    filteredData = allData.filter(d => {
+      const fecha = d.Fecha ? d.Fecha.split('T')[0] : '';
+      return fecha === hoy && (!p || d.Proyecto===p);
+    });
+    if (activeTab===0) renderTimeline();
+  }
+  
+  function applyFilters2() {
+    const sel = document.getElementById('filterProyecto2'); if (!sel) return;
+    const p = sel.value;
+    const hoy = getHoyLocal();
+    filteredData2 = allData.filter(d => {
+      const fecha = d.Fecha ? d.Fecha.split('T')[0] : '';
+      return fecha === hoy && (!p || d.Proyecto===p);
+    });
+    if (activeTab===1) renderResumen();
+  }
 
 // ══════════════════════════════════════════════════════════════
 // LÍNEA DE TIEMPO
@@ -892,9 +897,10 @@ function switchTab(i) {
 setInterval(() => document.getElementById('headerTime').textContent = new Date().toLocaleTimeString('es-MX'), 1000);
 
 function init() {
-  const hoy    = new Date().toISOString().split('T')[0];
-  const semana = new Date(Date.now()-7*86400000).toISOString().split('T')[0];
-  document.getElementById('dateFrom').value = semana;
+  const hoy    = getHoyLocal();
+  const semana = new Date(Date.now()-7*86400000);
+  const semanaStr = `${semana.getFullYear()}-${String(semana.getMonth()+1).padStart(2,'0')}-${String(semana.getDate()).padStart(2,'0')}`;
+  document.getElementById('dateFrom').value = semanaStr;
   document.getElementById('dateTo').value   = hoy;
   loadData();
   setInterval(loadData, REFRESH_MS);

@@ -1186,7 +1186,7 @@ DATOS=[
           "Motivo del tema": "Normal",
           "Comentario": "0.5",
           "Pieza ID": "b1543ce4-343a-4c1c-bde9-91acbde79aa2"
-        }
+        },
 ]
 
 # 🔹 API

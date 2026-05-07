@@ -1202,23 +1202,9 @@ DATOS=[
           "Pieza ID": "c64e1819-bbbd-4ac6-ac9a-144449d273cd"
         },
         {
-          "ID": 86,
-          "Fecha": "2026-05-07",
-          "Hora de inicio": "2026-05-07T06:34:00",
-          "Hora final": "2026-05-07T06:36:00",
-          "Proyecto": "Gondola Mill",
-          "Ensamble": "Stub sill",
-          "Nave": "Nave 1",
-          "Lote": "R42455",
-          "Tema": "Liberacion",
-          "Motivo del tema": "Normal",
-          "Comentario": "0.5",
-          "Pieza ID": "c64e1819-bbbd-4ac6-ac9a-144449d273cd"
-        },
-        {
           "ID": 87,
           "Fecha": "2026-05-07",
-          "Hora de inicio": "2026-05-07T06:36:00",
+          "Hora de inicio": "2026-05-07T06:34:00",
           "Hora final": "2026-05-07T07:21:00",
           "Proyecto": "Gondola Mill",
           "Ensamble": "Stub sill",
@@ -1227,7 +1213,7 @@ DATOS=[
           "Tema": "Liberacion",
           "Motivo del tema": "Normal",
           "Comentario": "0.5",
-          "Pieza ID": "c515e04c-ccf9-4006-85e9-8dff9afa1b53"
+          "Pieza ID": "c64e1819-bbbd-4ac6-ac9a-144449d273cd"
         },
         {
           "ID": 88,

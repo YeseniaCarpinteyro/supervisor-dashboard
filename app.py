@@ -5,7 +5,7 @@ import os
 app = Flask(__name__, static_folder='.')
 CORS(app)
 
-# 📁 Base dir (importante para Render)
+# Base dir para render
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # 🧠 DATOS
@@ -1346,20 +1346,15 @@ DATOS=[
       
 ]
 
-# 🔹 API
+#  API
 @app.route('/datos')
 def datos():
     return jsonify(DATOS)
 
-# 🔹 HTML principal
+#  HTML principal
 @app.route('/')
 def index():
     return send_from_directory(BASE_DIR, 'dashboard_supervisor.html')
-
-# 🔹 Logo (por si acaso)
-@app.route('/logo.png')
-def logo():
-    return send_from_directory(BASE_DIR, 'logo.png')
 
 if __name__ == '__main__':
     app.run()

@@ -1355,6 +1355,11 @@ def datos():
 @app.route('/')
 def index():
     return send_from_directory(BASE_DIR, 'dashboard_supervisor.html')
-
+      
+# Logo
+@app.route('/logo.png')
+def logo():
+    return send_from_directory(BASE_DIR, 'logo.png')
+      
 if __name__ == '__main__':
     app.run()

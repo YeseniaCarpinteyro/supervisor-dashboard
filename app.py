@@ -1452,6 +1452,34 @@ DATOS=[
           "Motivo del tema": "Normal",
           "Comentario": "0.5",
           "Pieza ID": "01dc6fa3-1f23-4516-8da5-11e61c66bc47"
+        },
+        {
+          "ID": 105,
+          "Fecha": "2026-05-11",
+          "Hora de inicio": "2026-05-11T08:26:00",
+          "Hora final": "2026-05-11T10:39:00",
+          "Proyecto": "Gondola Iron Rotary",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 6",
+          "Lote": "R42450",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "c7c55340-bfec-4f97-b3dd-864693aaa375"
+        },
+        {
+          "ID": 106,
+          "Fecha": "2026-05-11",
+          "Hora de inicio": "2026-05-11T10:14:00",
+          "Hora final": "2026-05-11T11:02:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "deaf5f34-a097-4722-8a78-581456a95b71"
         }
      
       

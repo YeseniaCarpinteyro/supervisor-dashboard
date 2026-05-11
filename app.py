@@ -1564,6 +1564,34 @@ DATOS=[
           "Motivo del tema": "Normal",
           "Comentario": "0.5",
           "Pieza ID": "69048014-8eab-477f-ba71-10ec3dccefe0"
+        },
+        {
+          "ID": 113,
+          "Fecha": "2026-05-11",
+          "Hora de inicio": "2026-05-11T13:47:00",
+          "Hora final": "2026-05-11T14:32:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "680ea925-d216-4da2-adf9-6f4cf6a2e00f"
+        },
+        {
+          "ID": 114,
+          "Fecha": "2026-05-11",
+          "Hora de inicio": "2026-05-11T13:39:00",
+          "Hora final": "2026-05-11T14:39:00",
+          "Proyecto": "FlatCar",
+          "Ensamble": "Bolster",
+          "Nave": "Nave 1",
+          "Lote": "R42420",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "1",
+          "Pieza ID": "4bb0c80f-f921-4589-a7b8-89a36723f3be"
         }
         
      

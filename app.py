@@ -1480,7 +1480,92 @@ DATOS=[
           "Motivo del tema": "Normal",
           "Comentario": "0.5",
           "Pieza ID": "deaf5f34-a097-4722-8a78-581456a95b71"
+        },
+        {
+          "ID": 107,
+          "Fecha": "2026-05-11",
+          "Hora de inicio": "2026-05-11T11:02:00",
+          "Hora final": "2026-05-11T12:13:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "672b656d-1f01-453c-a52c-39d56c262e22"
+        },
+        {
+          "ID": 108,
+          "Fecha": "2026-05-11",
+          "Hora de inicio": "2026-05-11T10:05:00",
+          "Hora final": "2026-05-11T12:34:00",
+          "Proyecto": "FlatCar",
+          "Ensamble": "Bolster",
+          "Nave": "Nave 1",
+          "Lote": "R42420",
+          "Tema": "Normal",
+          "Motivo del tema": "Normal",
+          "Comentario": "NA",
+          "Pieza ID": "4bb0c80f-f921-4589-a7b8-89a36723f3be"
+        },
+        {
+          "ID": 109,
+          "Fecha": "2026-05-11",
+          "Hora de inicio": "2026-05-11T12:03:00",
+          "Hora final": "2026-05-11T12:53:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Comedor",
+          "Motivo del tema": "Comedor",
+          "Comentario": "NA",
+          "Pieza ID": "69048014-8eab-477f-ba71-10ec3dccefe0"
+        },
+        {
+          "ID": 110,
+          "Fecha": "2026-05-11",
+          "Hora de inicio": "2026-05-11T10:39:00",
+          "Hora final": "2026-05-11T13:19:00",
+          "Proyecto": "Gondola Iron Rotary",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 6",
+          "Lote": "R42450",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "898df8f6-2cd4-4226-ab8f-ef3353689fb5"
+        },
+        {
+          "ID": 111,
+          "Fecha": "2026-05-11",
+          "Hora de inicio": "2026-05-11T12:34:00",
+          "Hora final": "2026-05-11T13:39:00",
+          "Proyecto": "FlatCar",
+          "Ensamble": "Bolster",
+          "Nave": "Nave 1",
+          "Lote": "R42420",
+          "Tema": "Comedor",
+          "Motivo del tema": "Comedor",
+          "Comentario": "NA",
+          "Pieza ID": "4bb0c80f-f921-4589-a7b8-89a36723f3be"
+        },
+        {
+          "ID": 112,
+          "Fecha": "2026-05-11",
+          "Hora de inicio": "2026-05-11T12:53:00",
+          "Hora final": "2026-05-11T13:47:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "69048014-8eab-477f-ba71-10ec3dccefe0"
         }
+        
      
       
 ]

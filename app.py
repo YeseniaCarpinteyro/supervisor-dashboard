@@ -1718,8 +1718,49 @@ DATOS=[
           "Motivo del tema": "Normal",
           "Comentario": "1",
           "Pieza ID": "e887c1cc-e6ae-47aa-abf9-63dcf757d1c1"
+        },
+        {
+          "ID": 124,
+          "Fecha": "2026-05-12",
+          "Hora de inicio": "2026-05-12T08:57:00",
+          "Hora final": "2026-05-12T09:55:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "43645e4d-4dfc-4c2e-b72c-b8a5b5ed4444"
+        },
+        {
+          "ID": 125,
+          "Fecha": "2026-05-12",
+          "Hora de inicio": "2026-05-12T07:13:00",
+          "Hora final": "2026-05-12T08:14:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "43645e4a-4dfc-4c2b-b72c-b8a5b5edd1c3"
+        },
+        {
+          "ID": 126,
+          "Fecha": "2026-05-12",
+          "Hora de inicio": "2026-05-12T09:55:00",
+          "Hora final": "2026-05-12T10:38:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "7050f60d-2caa-41ed-aa20-d18659fdeb30"
         }
-        
      
       
 ]

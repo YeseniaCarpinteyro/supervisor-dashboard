@@ -247,11 +247,15 @@ input[type="date"]:focus { border-color:var(--accent); }
   <!-- SCREEN 1: LÍNEA DE TIEMPO -->
   <div class="screen active" id="screen0">
     <div class="filters-bar">
-      <div class="filter-group">
-        <div class="filter-label">Proyecto</div>
-        <select id="filterProyecto" onchange="applyFilters()"><option value="">Todos</option></select>
-      </div>
+    <div class="filter-group">
+      <div class="filter-label">Fecha</div>
+      <input type="date" id="filterFecha" onchange="applyFilters()">
     </div>
+    <div class="filter-group">
+      <div class="filter-label">Proyecto</div>
+      <select id="filterProyecto" onchange="applyFilters()"><option value="">Todos</option></select>
+    </div>
+  </div>
     <div class="timeline-container">
       <div class="timeline-header">
         <div class="timeline-title">Producción del día — 07:00 a 16:00</div>
@@ -418,10 +422,11 @@ function processData() {
 
   function applyFilters() {
     const p = document.getElementById('filterProyecto').value;
-    const hoy = getHoyLocal();
+    const fechaInput = document.getElementById('filterFecha');
+    const fechaSel = fechaInput && fechaInput.value ? fechaInput.value : getHoyLocal();
     filteredData = allData.filter(d => {
       const fecha = d.Fecha ? d.Fecha.split('T')[0] : '';
-      return fecha === hoy && (!p || d.Proyecto===p);
+      return fecha === fechaSel && (!p || d.Proyecto===p);
     });
     if (activeTab===0) renderTimeline();
   }
@@ -522,9 +527,43 @@ function renderTimeline() {
 }
 
 function clickBlock(pid, rows) {
-  if (!pid) return;
+  // Si no tiene PiezaID es un paro sin pieza — mostrar detalle del paro
+  if (!pid) {
+    const row = rows.find(r => !r['Pieza ID'] && isParo(r.Tema));
+    if (row) showParoDetalle(row);
+    return;
+  }
   if (selectedPID===pid) { selectedPID=null; renderTimeline(); closeDetail(); return; }
   selectedPID=pid; renderTimeline(); showDetail(pid, rows);
+}
+
+function showParoDetalle(row) {
+  const panel = document.getElementById('detailPanel');
+  const cont  = document.getElementById('detailContent');
+  const dur   = getDur(row);
+
+  cont.innerHTML = `
+    <div class="detail-title">${row['Motivo del tema']||row.Tema}</div>
+    <div class="detail-sub">${row.Ensamble} · ${row.Proyecto}</div>
+    <div class="detail-stat">
+      <div class="detail-stat-label">Tipo de paro</div>
+      <div class="detail-stat-value" style="font-size:16px">${row.Tema}</div>
+    </div>
+    <div class="detail-stat">
+      <div class="detail-stat-label">Duración del paro</div>
+      <div class="detail-stat-value red">${fmtDur(dur)}</div>
+    </div>
+    <div class="detail-stat">
+      <div class="detail-stat-label">Horario</div>
+      <div class="detail-stat-value" style="font-size:16px">${fmtTime(row['Hora de inicio'])} → ${fmtTime(row['Hora final'])}</div>
+    </div>
+    ${row.Comentario&&row.Comentario!=='NA'?`
+    <div class="detail-stat">
+      <div class="detail-stat-label">Motivo específico</div>
+      <div class="detail-stat-value" style="font-size:16px;color:var(--warning)">${row.Comentario}</div>
+    </div>`:''}`;
+
+  panel.classList.add('open');
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -565,8 +604,33 @@ function showDetail(pid, rows) {
   const piezaInicioMs = Math.min(...prodRows.map(r => { const d=adjTZ(r['Hora de inicio']); return d?d.getTime():Infinity; }));
   const piezaFinMs    = Math.max(...prodRows.map(r => { const d=adjTZ(r['Hora final']);    return d?d.getTime():0; }));
 
+  function showDetail(pid, rows) {
+  const panel = document.getElementById('detailPanel');
+  const cont  = document.getElementById('detailContent');
+
+  // Si no hay pid es un paro sin pieza — mostrar solo info del paro
+  if (!pid) {
+    closeDetail();
+    return;
+  }
+
+  const pRows = rows.filter(r => r['Pieza ID']===pid);
+  if (!pRows.length) return;
+
+  const prodRows = pRows.filter(r => !isParo(r.Tema));
+  const tProd    = prodRows.reduce((s,r) => s+getDur(r), 0);
+
+  // Rango temporal de la pieza basado en producción
+  const piezaInicioMs = prodRows.length
+    ? Math.min(...prodRows.map(r => { const d=adjTZ(r['Hora de inicio']); return d?d.getTime():Infinity; }))
+    : Infinity;
+  const piezaFinMs = prodRows.length
+    ? Math.max(...prodRows.map(r => { const d=adjTZ(r['Hora final']); return d?d.getTime():0; }))
+    : 0;
+
+  // Paros intermedios: sin PiezaID, dentro del rango de la pieza
   const parosI = rows.filter(r => {
-    if (r['Pieza ID']) return false; 
+    if (r['Pieza ID']) return false;
     if (!isParo(r.Tema)) return false;
     const tI = adjTZ(r['Hora de inicio']);
     const tF = adjTZ(r['Hora final']);
@@ -584,7 +648,7 @@ function showDetail(pid, rows) {
     <div class="detail-sub">${pRows[0].Proyecto} · ID: ${pid.substring(0,16)}…</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
       <div class="detail-stat"><div class="detail-stat-label">Tiempo producción</div><div class="detail-stat-value green">${fmtDur(tProd)}</div></div>
-      <div class="detail-stat"><div class="detail-stat-label">Tiempo en paros</div><div class="detail-stat-value red">${fmtDur(tParo)}</div></div>
+      <div class="detail-stat"><div class="detail-stat-label">Tiempo en paros</div><div class="detail-stat-value red">${tParo>0?fmtDur(tParo):'Sin paros'}</div></div>
       <div class="detail-stat"><div class="detail-stat-label">Estado</div>
         <div class="detail-stat-value" style="font-size:15px;color:${isLib?'var(--green)':'var(--warning)'}">
           ${isLib?'✅ Liberada':'🔄 En proceso'}
@@ -592,7 +656,6 @@ function showDetail(pid, rows) {
       </div>
       <div class="detail-stat"><div class="detail-stat-label">Carsets</div><div class="detail-stat-value green">${isLib?cs:'—'}</div></div>
     </div>
-
     <div class="detail-section-title">Intervalos de producción</div>
     ${prodRows.map(r=>`
       <div class="detail-interval">
@@ -600,7 +663,6 @@ function showDetail(pid, rows) {
         <div class="detail-interval-time">${fmtTime(r['Hora de inicio'])} → ${fmtTime(r['Hora final'])}</div>
         <div class="detail-interval-dur">${fmtDur(getDur(r))}</div>
       </div>`).join('')}
-
     ${parosI.length ? `
       <div class="detail-section-title">Paros durante esta pieza</div>
       ${parosI.map(r=>`
@@ -611,13 +673,13 @@ function showDetail(pid, rows) {
         </div>
         ${r.Comentario&&r.Comentario!=='NA'?`<div style="font-size:10px;font-family:'Courier New';color:var(--text-dim);padding:2px 12px 6px">💬 ${r.Comentario}</div>`:''}`).join('')}
     ` : '<div style="font-size:11px;color:var(--text-dim);padding:8px 0">Sin paros durante esta pieza</div>'}
-
     <div class="detail-stat" style="margin-top:14px">
       <div class="detail-stat-label">Tiempo total de la pieza</div>
       <div class="detail-stat-value">${fmtDur(tProd+tParo)}</div>
     </div>`;
 
   panel.classList.add('open');
+
 }
 function closeDetail() { document.getElementById('detailPanel').classList.remove('open'); selectedPID=null; renderTimeline(); }
 
@@ -892,6 +954,7 @@ function switchTab(i) {
   activeTab=i;
   document.querySelectorAll('.tab').forEach((t,j) => t.classList.toggle('active',i===j));
   document.querySelectorAll('.screen').forEach((s,j) => s.classList.toggle('active',i===j));
+  document.getElementById('filterFecha').value = getHoyLocal();
   if (i===0) renderTimeline();
   if (i===1) renderResumen();
 }

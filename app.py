@@ -1914,6 +1914,34 @@ DATOS=[
         "Motivo del tema": "Comedor",
         "Comentario": "NA",
         "Pieza ID": "dc46cd74-4045-4c7a-942d-11f6c3ab7bd3"
+      },
+      {
+        "ID": 138,
+        "Fecha": "2026-05-14",
+        "Hora de inicio": "2026-05-14T06:02:00",
+        "Hora final": "2026-05-14T06:28:00",
+        "Proyecto": "Gondola Mill",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 1",
+        "Lote": "R42455",
+        "Tema": "Paro",
+        "Motivo del tema": "SEGURIDAD",
+        "Comentario": "Platica de 5 Minutos",
+        "Pieza ID": "NA"
+      },
+      {
+        "ID": 139,
+        "Fecha": "2026-05-14",
+        "Hora de inicio": "2026-05-14T06:02:00",
+        "Hora final": "2026-05-14T06:28:00",
+        "Proyecto": "Gondola Mill",
+        "Ensamble": "Crossbearer",
+        "Nave": "Nave 1",
+        "Lote": "R42455",
+        "Tema": "Paro",
+        "Motivo del tema": "SEGURIDAD",
+        "Comentario": "Platica de 5 Minutos",
+        "Pieza ID": "NA"
       }
      
       

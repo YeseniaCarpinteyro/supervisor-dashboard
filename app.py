@@ -1942,6 +1942,34 @@ DATOS=[
         "Motivo del tema": "SEGURIDAD",
         "Comentario": "Platica de 5 Minutos",
         "Pieza ID": "NA"
+      },
+      {
+        "ID": 140,
+        "Fecha": "2026-05-14",
+        "Hora de inicio": "2026-05-14T06:00:00",
+        "Hora final": "2026-05-14T06:31:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Paro",
+        "Motivo del tema": "SEGURIDAD",
+        "Comentario": "Platica de 5 Minutos",
+        "Pieza ID": "NA"
+      },
+      {
+        "ID": 141,
+        "Fecha": "2026-05-14",
+        "Hora de inicio": "2026-05-14T06:00:00",
+        "Hora final": "2026-05-14T06:31:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "0c8aca5e-662b-424d-8ff5-8d2fc5b51116"
       }
      
       

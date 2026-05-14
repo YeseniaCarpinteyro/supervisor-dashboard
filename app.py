@@ -1970,6 +1970,20 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "0.5",
         "Pieza ID": "0c8aca5e-662b-424d-8ff5-8d2fc5b51116"
+      },
+      {
+        "ID": 142,
+        "Fecha": "2026-05-14",
+        "Hora de inicio": "2026-05-14T08:57:00",
+        "Hora final": "2026-05-14T11:42:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "b1a268b4-bf18-4f5d-9a8c-bb7b9872d132"
       }
      
       

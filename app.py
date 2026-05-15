@@ -2124,8 +2124,63 @@ DATOS=[
           "Motivo del tema": "Normal",
           "Comentario": "1",
           "Pieza ID": "7b3a4893-4771-4118-a006-1a24dff46d01"
+        },
+        {
+          "ID": 153,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T06:30:00",
+          "Hora final": "2026-05-15T10:16:00",
+          "Proyecto": "Gondola Iron Rotary",
+          "Ensamble": "Frentes",
+          "Nave": "Nave 1",
+          "Lote": "R42450",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "1",
+          "Pieza ID": "957556fd-4d39-401a-99bb-5b3a732af927"
+        },
+        {
+          "ID": 154,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T06:30:00",
+          "Hora final": "2026-05-15T10:33:00",
+          "Proyecto": "Refree",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42465",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "b83f5ef8-8462-4074-883d-b1aaeb92747c"
+        },
+        {
+          "ID": 155,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T08:35:00",
+          "Hora final": "2026-05-15T10:37:00",
+          "Proyecto": "Gondola Iron Rotary",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 6",
+          "Lote": "R42450",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "e80e5a93-fe7f-4406-bd0b-be63d7eda312"
+        },
+        {
+          "ID": 156,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T09:35:00",
+          "Hora final": "2026-05-15T10:49:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Crossbearer",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "1",
+          "Pieza ID": "235c5fff-d04a-4536-ae4d-60584e7b8bbf"
         }
-           
 ]
 
 #  API

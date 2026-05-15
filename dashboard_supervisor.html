@@ -990,9 +990,8 @@ function switchTab(i) {
 setInterval(() => document.getElementById('headerTime').textContent = new Date().toLocaleTimeString('es-MX'), 1000);
 document.getElementById('filterFecha').value = getHoyLocal();
 function init() {
-  checkLogin(); // ← agregar esta línea
+  checkLogin(); 
   const hoy = getHoyLocal();
-  const hoy    = getHoyLocal();
   const semana = new Date(Date.now()-7*86400000);
   const semanaStr = `${semana.getFullYear()}-${String(semana.getMonth()+1).padStart(2,'0')}-${String(semana.getDate()).padStart(2,'0')}`;
   document.getElementById('dateFrom').value = semanaStr;

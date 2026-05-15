@@ -1984,9 +1984,148 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "0.5",
         "Pieza ID": "b1a268b4-bf18-4f5d-9a8c-bb7b9872d132"
-      }
-     
-      
+      },
+      {
+          "ID": 143,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T06:00:00",
+          "Hora final": "2026-05-15T06:24:00",
+          "Proyecto": "Gondola Iron Rotary",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 6",
+          "Lote": "R42450",
+          "Tema": "Paro",
+          "Motivo del tema": "SEGURIDAD",
+          "Comentario": "Platica de 5 Minutos",
+          "Pieza ID": "NA"
+        },
+        {
+          "ID": 144,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T06:03:00",
+          "Hora final": "2026-05-15T06:34:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Paro",
+          "Motivo del tema": "SEGURIDAD",
+          "Comentario": "Platica de 5 Minutos",
+          "Pieza ID": "NA"
+        },
+        {
+          "ID": 145,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T06:03:00",
+          "Hora final": "2026-05-15T06:34:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Crossbearer",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Paro",
+          "Motivo del tema": "SEGURIDAD",
+          "Comentario": "Platica de 5 Minutos",
+          "Pieza ID": "NA"
+        },
+        {
+          "ID": 146,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T06:34:00",
+          "Hora final": "2026-05-15T08:51:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "4fa60a51-4384-46e9-89e2-f733f0e0681"
+        },
+        {
+          "ID": 147,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T06:00:00",
+          "Hora final": "2026-05-15T06:30:00",
+          "Proyecto": "Gondola Iron Rotary",
+          "Ensamble": "Frentes",
+          "Nave": "Nave 1",
+          "Lote": "R42450",
+          "Tema": "Paro",
+          "Motivo del tema": "SEGURIDAD",
+          "Comentario": "Platica de 5 Minutos",
+          "Pieza ID": "NA"
+        },
+        {
+          "ID": 148,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T06:00:00",
+          "Hora final": "2026-05-15T06:30:00",
+          "Proyecto": "Refree",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42465",
+          "Tema": "Paro",
+          "Motivo del tema": "SEGURIDAD",
+          "Comentario": "Platica de 5 Minutos",
+          "Pieza ID": "NA"
+        },
+        {
+          "ID": 149,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T06:24:00",
+          "Hora final": "2026-05-15T08:35:00",
+          "Proyecto": "Gondola Iron Rotary",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 6",
+          "Lote": "R42450",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "015b446d-bf88-41d0-b40e-038a5da008ed"
+        },
+        {
+          "ID": 150,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T08:51:00",
+          "Hora final": "2026-05-15T09:34:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "a667ec0a-5683-4a53-9042-9b469e9a46ea"
+        },
+        {
+          "ID": 151,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T08:07:00",
+          "Hora final": "2026-05-15T09:35:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Crossbearer",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "1",
+          "Pieza ID": "48f2827b-e903-4ed9-8965-5fe5087851fd"
+        },
+        {
+          "ID": 152,
+          "Fecha": "2026-05-15",
+          "Hora de inicio": "2026-05-15T06:34:00",
+          "Hora final": "2026-05-15T08:07:00",
+          "Proyecto": "Gondola Mill",
+          "Ensamble": "Crossbearer",
+          "Nave": "Nave 1",
+          "Lote": "R42455",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "1",
+          "Pieza ID": "7b3a4893-4771-4118-a006-1a24dff46d01"
+        }
+           
 ]
 
 #  API

@@ -201,6 +201,58 @@ input[type="date"]:focus { border-color:var(--accent); }
 </head>
 <body>
 
+<!-- PANTALLA DE LOGIN -->
+<div id="loginScreen" style="
+  position:fixed; inset:0; background:#0b1221;
+  display:flex; align-items:center; justify-content:center; z-index:999;">
+  <div style="
+    background:#0f1a2e; border:1px solid #1e3050;
+    border-radius:16px; padding:40px; width:100%; max-width:360px;
+    display:flex; flex-direction:column; gap:20px;">
+    
+    <div style="text-align:center">
+      <img src="logo.png" style="height:60px;object-fit:contain;margin-bottom:12px"
+           onerror="this.style.display='none'">
+      <div style="font-size:20px;font-weight:700;color:#00e676">LÍNEA ACTIVA</div>
+      <div style="font-size:11px;color:#7a9abd;letter-spacing:1.5px;text-transform:uppercase">Dashboard Supervisor</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <label style="font-size:10px;color:#7a9abd;text-transform:uppercase;letter-spacing:1px">Usuario</label>
+      <input id="loginUser" type="text" placeholder="Usuario"
+        style="background:#152035;border:1px solid #1e3050;color:#fff;
+        padding:10px 14px;border-radius:8px;font-size:14px;outline:none;
+        font-family:Arial,sans-serif;"
+        onkeydown="if(event.key==='Enter') doLogin()">
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <label style="font-size:10px;color:#7a9abd;text-transform:uppercase;letter-spacing:1px">Contraseña</label>
+      <input id="loginPass" type="password" placeholder="Contraseña"
+        style="background:#152035;border:1px solid #1e3050;color:#fff;
+        padding:10px 14px;border-radius:8px;font-size:14px;outline:none;
+        font-family:Arial,sans-serif;"
+        onkeydown="if(event.key==='Enter') doLogin()">
+    </div>
+
+    <div id="loginError" style="
+      display:none; background:rgba(255,82,82,.15);
+      border:1px solid rgba(255,82,82,.3); color:#ff5252;
+      padding:8px 14px; border-radius:8px; font-size:12px; text-align:center;">
+      Usuario o contraseña incorrectos
+    </div>
+
+    <button onclick="doLogin()" style="
+      background:linear-gradient(135deg,#00e676,#00b050);
+      border:none; color:#000; padding:12px;
+      border-radius:8px; font-size:14px; font-weight:700;
+      cursor:pointer; font-family:Arial,sans-serif;">
+      Entrar
+    </button>
+
+  </div>
+</div>
+
 <div class="tooltip" id="tooltip"></div>
 
 <div class="detail-panel" id="detailPanel">
@@ -938,6 +990,8 @@ function switchTab(i) {
 setInterval(() => document.getElementById('headerTime').textContent = new Date().toLocaleTimeString('es-MX'), 1000);
 document.getElementById('filterFecha').value = getHoyLocal();
 function init() {
+  checkLogin(); // ← agregar esta línea
+  const hoy = getHoyLocal();
   const hoy    = getHoyLocal();
   const semana = new Date(Date.now()-7*86400000);
   const semanaStr = `${semana.getFullYear()}-${String(semana.getMonth()+1).padStart(2,'0')}-${String(semana.getDate()).padStart(2,'0')}`;
@@ -946,6 +1000,36 @@ function init() {
   document.getElementById('filterFecha2').value = getHoyLocal();
   loadData();
   setInterval(loadData, REFRESH_MS);
+}
+
+// ══════════════════════════════════════════════════════════════
+// LOGIN
+// ══════════════════════════════════════════════════════════════
+const USUARIOS = {
+  'supervisor': '123456'
+};
+
+function doLogin() {
+  const user = document.getElementById('loginUser').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPass').value;
+  const err  = document.getElementById('loginError');
+
+  if (USUARIOS[user] && USUARIOS[user] === pass) {
+    document.getElementById('loginScreen').style.display = 'none';
+    err.style.display = 'none';
+    // Guardar sesión para que no pida login al recargar
+    sessionStorage.setItem('loggedIn', 'true');
+  } else {
+    err.style.display = 'block';
+    document.getElementById('loginPass').value = '';
+  }
+}
+
+// Verificar si ya hay sesión activa
+function checkLogin() {
+  if (sessionStorage.getItem('loggedIn') === 'true') {
+    document.getElementById('loginScreen').style.display = 'none';
+  }
 }
 
 init();

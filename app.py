@@ -2221,7 +2221,7 @@ DATOS=[
           "Tema": "Paro",
           "Motivo del tema": "SEGURIDAD",
           "Comentario": "Platica de 5 Minutos",
-          "Pieza ID": "502f2aaa-3fbc-46a4-ad2a-d700e8a463da"
+          "Pieza ID": "NA"
         },
         {
           "ID": 160,
@@ -2235,7 +2235,7 @@ DATOS=[
           "Tema": "Paro",
           "Motivo del tema": "SEGURIDAD",
           "Comentario": "Platica de 5 Minutos",
-          "Pieza ID": "2d9a05fc-f5de-4611-9b19-4c7c03277d93"
+          "Pieza ID": "NA"
         },
         {
           "ID": 161,
@@ -2431,7 +2431,7 @@ DATOS=[
           "Tema": "Normal",
           "Motivo del tema": "Normal",
           "Comentario": "NA",
-          "Pieza ID": "30c7f5d3-095b-4cab-a026-afec76a3d0d8"
+          "Pieza ID": "NA"
         },
         {
           "ID": 175,
@@ -2459,7 +2459,7 @@ DATOS=[
           "Tema": "Comedor",
           "Motivo del tema": "Comedor",
           "Comentario": "NA",
-          "Pieza ID": "338a906a-e2e0-4d93-8501-b022b464be92"
+          "Pieza ID": "NA"
         },
         {
           "ID": 177,
@@ -2568,9 +2568,9 @@ DATOS=[
           "Ensamble": "Stub sill",
           "Nave": "Nave 6",
           "Lote": "R42450",
-          "Tema": "SEGURIDAD",
-          "Motivo del tema": "Platica de 5 Minutos",
-          "Comentario": "NA",
+          "Tema": "Paro",
+          "Motivo del tema": "SEGURIDAD",
+          "Comentario": "Platica de 5 Minutos",
           "Pieza ID": "NA"
         },
         {
@@ -2582,9 +2582,9 @@ DATOS=[
           "Ensamble": "Stub sill",
           "Nave": "Nave 1",
           "Lote": "R42455",
-          "Tema": "SEGURIDAD",
-          "Motivo del tema": "Platica de 5 Minutos",
-          "Comentario": "NA",
+          "Tema": "Paro",
+          "Motivo del tema": "SEGURIDAD",
+          "Comentario": "Platica de 5 Minutos"
           "Pieza ID": "NA"
         },
         {
@@ -2596,9 +2596,9 @@ DATOS=[
           "Ensamble": "Crossbearer",
           "Nave": "Nave 1",
           "Lote": "R42455",
-          "Tema": "SEGURIDAD",
-          "Motivo del tema": "Platica de 5 Minutos",
-          "Comentario": "NA",
+          "Tema": "Paro",
+          "Motivo del tema": "SEGURIDAD",
+          "Comentario": "Platica de 5 Minutos"
           "Pieza ID": "NA"
         },
         {
@@ -2610,9 +2610,9 @@ DATOS=[
           "Ensamble": "Stub sill",
           "Nave": "Nave 1",
           "Lote": "R42465",
-          "Tema": "SEGURIDAD",
-          "Motivo del tema": "Platica de 5 Minutos",
-          "Comentario": "NA",
+          "Tema": "Paro",
+          "Motivo del tema": "SEGURIDAD",
+          "Comentario": "Platica de 5 Minutos"
           "Pieza ID": "NA"
         },
         {
@@ -2624,9 +2624,9 @@ DATOS=[
           "Ensamble": "Frentes",
           "Nave": "Nave 1",
           "Lote": "R42450",
-          "Tema": "SEGURIDAD",
-          "Motivo del tema": "Platica de 5 Minutos",
-          "Comentario": "NA",
+          "Tema": "Paro",
+          "Motivo del tema": "SEGURIDAD",
+          "Comentario": "Platica de 5 Minutos"
           "Pieza ID": "NA"
         },
         {
@@ -2638,9 +2638,9 @@ DATOS=[
           "Ensamble": "Stub sill",
           "Nave": "Nave 1",
           "Lote": "R42455",
-          "Tema": "Normal",
-          "Motivo del tema": "0.5",
-          "Comentario": "12c027c3-da14-475d-8812-267fa324a7e0",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
           "Pieza ID": "12c027c3-da14-475d-8812-267fa324a7e0"
         },
         {
@@ -2652,9 +2652,9 @@ DATOS=[
           "Ensamble": "Crossbearer",
           "Nave": "Nave 1",
           "Lote": "R42455",
-          "Tema": "Normal",
-          "Motivo del tema": "1",
-          "Comentario": "38c50485-c63f-44a4-994d-b56a94ad2387",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "1",
           "Pieza ID": "38c50485-c63f-44a4-994d-b56a94ad2387"
         }
       

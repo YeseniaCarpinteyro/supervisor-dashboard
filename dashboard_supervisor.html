@@ -69,7 +69,7 @@ select:hover,select:focus { border-color:var(--accent); }
 .timeline-row { display:flex; align-items:center; border-bottom:1px solid var(--border); min-height:54px; }
 .timeline-row:last-child { border-bottom:none; }
 
-/* Row label con carsets al lado */
+/* Row label */
 .row-label {
   width:170px; min-width:170px; padding:0 10px;
   display:flex; flex-direction:column; gap:2px;
@@ -136,7 +136,7 @@ select:hover,select:focus { border-color:var(--accent); }
 .chart-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px 22px; }
 .chart-title { font-size:13px; font-weight:700; margin-bottom:16px; color:var(--text); }
 
-/* Gráfica vertical — agrupada por Proyecto+Ensamble */
+/* Gráfica vertical */
 .vertical-chart-wrap { overflow-x:auto; }
 .vertical-chart { display:flex; align-items:flex-end; gap:24px; height:260px; padding-bottom:60px; border-bottom:1px solid var(--border); min-width:fit-content; }
 .v-group { display:flex; flex-direction:column; align-items:center; gap:4px; }
@@ -151,7 +151,7 @@ select:hover,select:focus { border-color:var(--accent); }
 .v-pct   { font-size:11px; font-family:'Courier New',monospace; font-weight:bold; margin-top:2px; }
 .chart-legend { display:flex; gap:14px; margin-top:12px; }
 
-/* Barras horizontales */
+/* Barras */
 .bar-chart { display:flex; flex-direction:column; gap:10px; }
 .bar-row { display:flex; align-items:center; gap:10px; }
 .bar-name { font-size:11px; color:var(--text-dim); min-width:130px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -191,7 +191,7 @@ input[type="date"]:focus { border-color:var(--accent); }
 @keyframes spin { to{transform:rotate(360deg)} }
 .empty-state { text-align:center; padding:50px; color:var(--text-dim); font-size:13px; }
 
-/* Modal cronograma histórico */
+/* Cronograma histórico */
 .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:300; display:none; align-items:center; justify-content:center; }
 .modal-overlay.open { display:flex; }
 .modal-box { background:var(--surface); border:1px solid var(--accent); border-radius:14px; padding:28px; width:90%; max-width:900px; max-height:85vh; overflow-y:auto; position:relative; }
@@ -260,7 +260,7 @@ input[type="date"]:focus { border-color:var(--accent); }
   <div id="detailContent"></div>
 </div>
 
-<!-- Modal cronograma histórico -->
+<!-- Cronograma histórico -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -325,7 +325,7 @@ input[type="date"]:focus { border-color:var(--accent); }
     </div>
   </div>
 
-  <!-- SCREEN 2: RESUMEN -->
+  <!-- SCREEN 2: RESUMEN DIARIO -->
   <div class="screen" id="screen1">
     <div class="filters-bar">
   <div class="filter-group">
@@ -370,11 +370,11 @@ input[type="date"]:focus { border-color:var(--accent); }
 
 <script>
 // ══════════════════════════════════════════════════════════════
-// CONFIG
+// CONFIGURACIÓN
 // ══════════════════════════════════════════════════════════════
 const BACKEND_URL = 'https://supervisor-backend-z81u.onrender.com/datos';
-const REFRESH_MS  = 30000; // 30 segundos — sin cambio constante
-const TZ_OFFSET   = 1;     // Ajuste hora SharePoint → MX
+const REFRESH_MS  = 30000; 
+const TZ_OFFSET   = 1;    
 const H_INI = 7, H_FIN = 16;
 
 function adjTZ(iso) {
@@ -395,10 +395,7 @@ function esHoy(fechaISO) {
 // ESTADO
 // ══════════════════════════════════════════════════════════════
 let allData=[], filteredData=[], filteredData2=[], activeTab=0, selectedPID=null;
-
-// ══════════════════════════════════════════════════════════════
-// UTILIDADES
-// ══════════════════════════════════════════════════════════════
+	
 const fmtTime = v => {
   if (!v) return '--';
   const d = typeof v==='string' ? adjTZ(v) : v;
@@ -415,12 +412,10 @@ const getDur = r => {
 };
 const isParo = t => t==='Paro'||t==='Comedor';
 
-// Suma carsets de liberaciones
 const getCS = rs => rs
   .filter(r => (r.Tema||'').trim().toLowerCase()==='liberacion')
   .reduce((s,r) => s+(parseFloat(r.Comentario)||0.5), 0);
 
-// Carsets completados hasta ahora (para línea de tiempo)
 const getCSAhora = rows => {
   const ahora = new Date();
   return rows
@@ -432,9 +427,7 @@ const getCSAhora = rows => {
     .reduce((s,r) => s+(parseFloat(r.Comentario)||0.5), 0);
 };
 
-// ══════════════════════════════════════════════════════════════
 // CARGA DE DATOS
-// ══════════════════════════════════════════════════════════════
 async function loadData() {
   try {
     const res = await fetch(BACKEND_URL);
@@ -448,7 +441,6 @@ async function loadData() {
 }
 
 function processData() {
-  // Normalizar — NO convertir a mayúsculas para mantener nombres legibles
   allData = allData.map(d => ({
     ...d,
     Proyecto: (d.Proyecto||'').trim(),
@@ -499,9 +491,7 @@ filteredData = allData.filter(d => {
     if (activeTab===1) renderResumen();
   }
 
-// ══════════════════════════════════════════════════════════════
 // LÍNEA DE TIEMPO
-// ══════════════════════════════════════════════════════════════
 function renderTimeline() {
 const fechaInput = document.getElementById('filterFecha');
 const fechaSel = fechaInput && fechaInput.value ? fechaInput.value : getHoyLocal();
@@ -512,7 +502,7 @@ const fechaSel = fechaInput && fechaInput.value ? fechaInput.value : getHoyLocal
   }
 
 const [y, m, d] = fechaSel.split('-').map(Number);
-const base = new Date(y, m - 1, d); // 👈 fecha seleccionada
+const base = new Date(y, m - 1, d); 
 base.setHours(0,0,0,0);
   const tMin = new Date(base.getTime() + H_INI*3600000);
 const jornadaFin = new Date(base.getTime() + H_FIN*3600000);
@@ -520,7 +510,6 @@ const jornadaFin = new Date(base.getTime() + H_FIN*3600000);
   const tMax = new Date(Math.max(jornadaFin.getTime(), ultimoReg));
   const span = tMax - tMin;
 
-  // Agrupar por proyecto+ensamble
   const grupos = {};
   filteredData.forEach(d => {
     const k = `${d.Proyecto}||${d.Ensamble}`;
@@ -535,7 +524,6 @@ const jornadaFin = new Date(base.getTime() + H_FIN*3600000);
   Object.values(grupos).forEach(g => {
     const csActual = getCSAhora(g.rows);
 
-    //Carsets en línea compacta al lado del ensamble
     html += `<div class="timeline-row">
       <div class="row-label">
         <div style="display:flex;align-items:baseline;gap:6px">
@@ -551,7 +539,6 @@ const jornadaFin = new Date(base.getTime() + H_FIN*3600000);
       const e = adjTZ(row['Hora final']);
       if (!s||!e) return;
 
-      // Clip al rango de jornada
       const cs = new Date(Math.max(s, tMin));
       const ce = new Date(Math.min(e, tMax));
       if (cs >= ce) return;
@@ -563,7 +550,6 @@ const jornadaFin = new Date(base.getTime() + H_FIN*3600000);
 
 	let pid;
 	if (!rawPID || rawPID.toUpperCase() === 'NA') {
-  	// 👇 ID único para paros sin pieza
   	pid = `PARO_${row['Hora de inicio']}_${row.Ensamble}_${row.Proyecto}`;
 	} else {
   	 pid = rawPID;
@@ -597,9 +583,7 @@ function clickBlock(pid, rows) {
   selectedPID=pid; renderTimeline(); showDetail(pid, rows);
 }
 
-// ══════════════════════════════════════════════════════════════
 // TOOLTIP
-// ══════════════════════════════════════════════════════════════
 function showTT(event, row) {
   const tt = document.getElementById('tooltip');
   const esP = isParo(row.Tema);
@@ -648,7 +632,6 @@ if (!pRows.length) return;
   
 let parosI = [];
 
-// CASO 1: si hay producción → buscar paros dentro del rango
 if (prodRows.length) {
   parosI = rows.filter(r => {
     if (!isParo(r.Tema)) return false;const tProd = prodRows.length ? prodRows.reduce((s,r) => s+getDur(r), 0) : 0;
@@ -712,9 +695,7 @@ else {
 }
 function closeDetail() { document.getElementById('detailPanel').classList.remove('open'); selectedPID=null; renderTimeline(); }
 
-// ══════════════════════════════════════════════════════════════
 // RESUMEN DEL DÍA
-// ══════════════════════════════════════════════════════════════
 function renderResumen() {
   const data  = filteredData2;
   const libs  = data.filter(d => d.Tema==='Liberacion');
@@ -892,7 +873,7 @@ function renderHistorial(data) {
   cont.innerHTML = html;
 }
 
-  // Para mostrar el avance de esa pieza en el historial
+  // Mostrar el avance por pieza en el historial
   function verDiaModal(titulo, rows) {
   document.getElementById('modalTitle').textContent = `Cronograma: ${titulo}`;
   const cont = document.getElementById('modalContent');
@@ -976,9 +957,7 @@ function renderHistorial(data) {
 function openModal()  { document.getElementById('modalOverlay').classList.add('open'); }
 function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
 
-// ══════════════════════════════════════════════════════════════
 // TABS + RELOJ + INIT
-// ══════════════════════════════════════════════════════════════
 function switchTab(i) {
   activeTab=i;
   document.querySelectorAll('.tab').forEach((t,j) => t.classList.toggle('active',i===j));
@@ -1001,9 +980,7 @@ function init() {
   setInterval(loadData, REFRESH_MS);
 }
 
-// ══════════════════════════════════════════════════════════════
 // LOGIN
-// ══════════════════════════════════════════════════════════════
 const USUARIOS = {
   'supervisor': '123456'
 };
@@ -1016,7 +993,6 @@ function doLogin() {
   if (USUARIOS[user] && USUARIOS[user] === pass) {
     document.getElementById('loginScreen').style.display = 'none';
     err.style.display = 'none';
-    // Guardar sesión para que no pida login al recargar
     sessionStorage.setItem('loggedIn', 'true');
   } else {
     err.style.display = 'block';
@@ -1024,7 +1000,6 @@ function doLogin() {
   }
 }
 
-// Verificar si ya hay sesión activa
 function checkLogin() {
   if (sessionStorage.getItem('loggedIn') === 'true') {
     document.getElementById('loginScreen').style.display = 'none';

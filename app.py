@@ -2584,7 +2584,7 @@ DATOS=[
           "Lote": "R42455",
           "Tema": "Paro",
           "Motivo del tema": "SEGURIDAD",
-          "Comentario": "Platica de 5 Minutos"
+          "Comentario": "Platica de 5 Minutos",
           "Pieza ID": "NA"
         },
         {
@@ -2598,7 +2598,7 @@ DATOS=[
           "Lote": "R42455",
           "Tema": "Paro",
           "Motivo del tema": "SEGURIDAD",
-          "Comentario": "Platica de 5 Minutos"
+          "Comentario": "Platica de 5 Minutos",
           "Pieza ID": "NA"
         },
         {
@@ -2612,7 +2612,7 @@ DATOS=[
           "Lote": "R42465",
           "Tema": "Paro",
           "Motivo del tema": "SEGURIDAD",
-          "Comentario": "Platica de 5 Minutos"
+          "Comentario": "Platica de 5 Minutos",
           "Pieza ID": "NA"
         },
         {
@@ -2626,7 +2626,7 @@ DATOS=[
           "Lote": "R42450",
           "Tema": "Paro",
           "Motivo del tema": "SEGURIDAD",
-          "Comentario": "Platica de 5 Minutos"
+          "Comentario": "Platica de 5 Minutos",
           "Pieza ID": "NA"
         },
         {
@@ -2656,7 +2656,7 @@ DATOS=[
           "Motivo del tema": "Normal",
           "Comentario": "1",
           "Pieza ID": "38c50485-c63f-44a4-994d-b56a94ad2387"
-        }
+        },
       
 ]
 

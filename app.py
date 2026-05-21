@@ -3305,7 +3305,7 @@ DATOS=[
           "ID": 237,
           "Fecha": "2026-05-21",
           "Hora de inicio": "2026-05-21T06:46:00",
-          "Hora final": "2026-05-21T06:48:00",
+          "Hora final": "2026-05-21T08:48:00",
           "Proyecto": "Gondola Iron Rotary",
           "Ensamble": "Stub sill",
           "Nave": "Nave 6",

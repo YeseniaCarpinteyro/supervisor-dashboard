@@ -3312,7 +3312,7 @@ DATOS=[
           "Lote": "R42450",
           "Tema": "Liberacion",
           "Motivo del tema": "Normal",
-          "Comentario": "",
+          "Comentario": "0.5",
           "Pieza ID": "6334294f-dcf5-4b03-a1b0-2f7e98d8f72d"
         }
 ]

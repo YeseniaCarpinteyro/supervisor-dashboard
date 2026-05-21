@@ -3285,7 +3285,7 @@ DATOS=[
           "Tema": "Paro",
           "Motivo del tema": "SEGURIDAD",
           "Comentario": "Platica de 5 Minutos",
-          "Pieza ID": "332bff1d-d1b7-49a4-8b30-ac171e86be6f"
+          "Pieza ID": "NA"
         },
         {
           "ID": 236,
@@ -3314,6 +3314,34 @@ DATOS=[
           "Motivo del tema": "Normal",
           "Comentario": "0.5",
           "Pieza ID": "6334294f-dcf5-4b03-a1b0-2f7e98d8f72d"
+        },
+        {
+          "ID": 238,
+          "Fecha": "2026-05-21",
+          "Hora de inicio": "2026-05-21T06:30:00",
+          "Hora final": "2026-05-21T10:23:00",
+          "Proyecto": "Gondola Iron Rotary",
+          "Ensamble": "Frentes",
+          "Nave": "Nave 1",
+          "Lote": "R42450",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "1",
+          "Pieza ID": "47584685-3c1e-443f-a2d1-dae66955f179"
+        },
+        {
+          "ID": 239,
+          "Fecha": "2026-05-21",
+          "Hora de inicio": "2026-05-21T06:29:00",
+          "Hora final": "2026-05-21T10:36:00",
+          "Proyecto": "Refree",
+          "Ensamble": "Stub sill",
+          "Nave": "Nave 1",
+          "Lote": "R42465",
+          "Tema": "Liberacion",
+          "Motivo del tema": "Normal",
+          "Comentario": "0.5",
+          "Pieza ID": "332bff1d-d1b7-49a4-8b30-ac171e86be6f"
         }
 ]
 

@@ -3906,7 +3906,7 @@ DATOS=[
       {
         "ID": 280,
         "Fecha": "2026-05-28",
-        "Hora de inicio": "2026-05-28T06:29:00",
+        "Hora de inicio": "2026-05-28T08:25:00",
         "Hora final": "2026-05-28T10:20:00",
         "Proyecto": "Gondola Iron Rotary",
         "Ensamble": "Stub sill",
@@ -3986,9 +3986,119 @@ DATOS=[
         "Motivo del tema": "SEGURIDAD",
         "Comentario": "Platica de 5 Minutos",
         "Pieza ID": "NA"
-      }       
-    
-      
+      },
+      {
+        "ID": 286,
+        "Fecha": "2026-05-28",
+        "Hora de inicio": "2026-05-28T10:21:00",
+        "Hora final": "2026-05-28T11:21:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Bolster",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Normal",
+        "Motivo del tema": "Normal",
+        "Comentario": "NA",
+        "Pieza ID": "f50114b0-86c2-42b4-ba76-07db7018c8bc"
+      },
+      {
+        "ID": 287,
+        "Fecha": "2026-05-28",
+        "Hora de inicio": "2026-05-28T11:21:00",
+        "Hora final": "2026-05-28T12:18:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Bolster",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Comedor",
+        "Motivo del tema": "Comedor",
+        "Comentario": "NA",
+        "Pieza ID": "f50114b0-86c2-42b4-ba76-07db7018c8bc"
+      },
+      {
+        "ID": 288,
+        "Fecha": "2026-05-28",
+        "Hora de inicio": "2026-05-28T10:22:00",
+        "Hora final": "2026-05-28T12:26:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Frentes",
+        "Nave": "Nave 1",
+        "Lote": "R42450",
+        "Tema": "Normal",
+        "Motivo del tema": "Normal",
+        "Comentario": "NA",
+        "Pieza ID": "3a9a578f-3339-470f-99d5-c55d2725c108"
+      },
+      {
+        "ID": 289,
+        "Fecha": "2026-05-28",
+        "Hora de inicio": "2026-05-28T10:21:00",
+        "Hora final": "2026-05-28T13:03:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "f75c20e1-8dc5-4520-a870-c4d58b37e2e6"
+      },
+      {
+        "ID": 290,
+        "Fecha": "2026-05-28",
+        "Hora de inicio": "2026-05-28T12:18:00",
+        "Hora final": "2026-05-28T13:03:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Bolster",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "f50114b0-86c2-42b4-ba76-07db7018c8bc"
+      },
+      {
+        "ID": 291,
+        "Fecha": "2026-05-28",
+        "Hora de inicio": "2026-05-28T13:03:00",
+        "Hora final": "2026-05-28T13:11:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Comedor",
+        "Motivo del tema": "Comedor",
+        "Comentario": "NA",
+        "Pieza ID": "NA"
+      },
+      {
+        "ID": 292,
+        "Fecha": "2026-05-28",
+        "Hora de inicio": "2026-05-28T12:25:00",
+        "Hora final": "2026-05-28T13:17:00",
+        "Proyecto": "Refree",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 1",
+        "Lote": "R42465",
+        "Tema": "Comedor",
+        "Motivo del tema": "Comedor",
+        "Comentario": "NA",
+        "Pieza ID": "NA"
+      },
+      {
+        "ID": 293,
+        "Fecha": "2026-05-28",
+        "Hora de inicio": "2026-05-28T12:26:00",
+        "Hora final": "2026-05-28T13:18:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Frentes",
+        "Nave": "Nave 1",
+        "Lote": "R42450",
+        "Tema": "Comedor",
+        "Motivo del tema": "Comedor",
+        "Comentario": "NA",
+        "Pieza ID": "3a9a578f-3339-470f-99d5-c55d2725c108"
+      }  
 ]
 
 #  API

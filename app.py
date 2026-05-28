@@ -4033,7 +4033,7 @@ DATOS=[
         "ID": 289,
         "Fecha": "2026-05-28",
         "Hora de inicio": "2026-05-28T10:21:00",
-        "Hora final": "2026-05-28T13:03:00",
+        "Hora final": "2026-05-28T12:23:00",
         "Proyecto": "Gondola Iron Rotary",
         "Ensamble": "Stub sill",
         "Nave": "Nave 6",
@@ -4060,7 +4060,7 @@ DATOS=[
       {
         "ID": 291,
         "Fecha": "2026-05-28",
-        "Hora de inicio": "2026-05-28T13:03:00",
+        "Hora de inicio": "2026-05-28T12:23:00",
         "Hora final": "2026-05-28T13:11:00",
         "Proyecto": "Gondola Iron Rotary",
         "Ensamble": "Stub sill",

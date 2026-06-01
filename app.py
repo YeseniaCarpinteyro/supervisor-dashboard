@@ -4490,6 +4490,76 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "0.5",
         "Pieza ID": "ee339e52-a783-4293-90d6-7d7e7af122ce"
+      },
+      {
+        "ID": 322,
+        "Fecha": "2026-06-01",
+        "Hora de inicio": "2026-06-01T12:20:00",
+        "Hora final": "2026-06-01T13:08:00",
+        "Proyecto": "Refree",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 1",
+        "Lote": "R42465",
+        "Tema": "Comedor",
+        "Motivo del tema": "Comedor",
+        "Comentario": "NA",
+        "Pieza ID": "fb69c9b2-8d59-463b-98c6-397447de4135"
+      },
+      {
+        "ID": 323,
+        "Fecha": "2026-06-01",
+        "Hora de inicio": "2026-06-01T12:20:00",
+        "Hora final": "2026-06-01T13:08:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Frentes",
+        "Nave": "Nave 1",
+        "Lote": "R42450",
+        "Tema": "Comedor",
+        "Motivo del tema": "Comedor",
+        "Comentario": "NA",
+        "Pieza ID": "d698108b-b206-430e-b2a1-9367fd1e5bcf"
+      },
+      {
+        "ID": 324,
+        "Fecha": "2026-06-01",
+        "Hora de inicio": "2026-06-01T13:08:00",
+        "Hora final": "2026-06-01T14:11:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Frentes",
+        "Nave": "Nave 1",
+        "Lote": "R42450",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "1",
+        "Pieza ID": "d698108b-b206-430e-b2a1-9367fd1e5bcf"
+      },
+      {
+        "ID": 325,
+        "Fecha": "2026-06-01",
+        "Hora de inicio": "2026-06-01T10:25:00",
+        "Hora final": "2026-06-01T14:11:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Stub sill",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "47c50582-9cf9-4983-b7e3-18d4f96886e9"
+      },
+      {
+        "ID": 326,
+        "Fecha": "2026-06-01",
+        "Hora de inicio": "2026-06-01T10:25:00",
+        "Hora final": "2026-06-01T14:12:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Bolster",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "d4290952-d72f-48b2-973c-b4a7a3b51c0e"
       }
 ]
 

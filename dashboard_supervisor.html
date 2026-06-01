@@ -649,7 +649,11 @@ else {
 }
 
   const tParo = parosI.reduce((s,r) => s+getDur(r), 0);
-  const isLib = pRows.some(r => r.Tema==='Liberacion');
+  const esParo = pid.startsWith('PARO_');
+  const isLib  = esParo
+  ? pRows.every(r => adjTZ(r['Hora final']) !== null)
+  : pRows.some(r => r.Tema==='Liberacion');
+
   const libR  = pRows.find(r => r.Tema==='Liberacion');
   const cs    = libR ? (parseFloat(libR.Comentario)||0.5) : '—';
 
@@ -661,7 +665,9 @@ else {
       <div class="detail-stat"><div class="detail-stat-label">Tiempo en paros</div><div class="detail-stat-value red">${fmtDur(tParo)}</div></div>
       <div class="detail-stat"><div class="detail-stat-label">Estado</div>
         <div class="detail-stat-value" style="font-size:15px;color:${isLib?'var(--green)':'var(--warning)'}">
-          ${isLib?'✅ Liberada':'🔄 En proceso'}
+          ${esParo
+          ? (isLib ? '✅ Finalizado' : '🔄 En curso')
+  	  : (isLib ? '✅ Liberada'   : '🔄 En proceso')}
         </div>
       </div>
       <div class="detail-stat"><div class="detail-stat-label">Carsets</div><div class="detail-stat-value green">${isLib?cs:'—'}</div></div>

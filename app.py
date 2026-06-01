@@ -4112,7 +4112,7 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "0.5",
         "Pieza ID": "798e963c-116c-4f6c-a092-397d62f040fa"
-      }
+      },
       {
         "ID": 295,
         "Fecha": "2026-05-28",
@@ -4126,7 +4126,7 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "0.5",
         "Pieza ID": "3509861e-4600-4cc7-aeec-5e91108fad5d"
-      }
+      },
       {
         "ID": 296,
         "Fecha": "2026-05-28",
@@ -4140,7 +4140,7 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "0.5",
         "Pieza ID": "b4506a15-d9ed-4c38-be90-0f266aa76bc5"
-      }
+      },
       {
         "ID": 297,
         "Fecha": "2026-05-28",
@@ -4154,7 +4154,7 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "1",
         "Pieza ID": "3a9a578f-3339-470f-99d5-c55d2725c108"
-      }
+      },
       {
         "ID": 298,
         "Fecha": "2026-05-29",
@@ -4168,7 +4168,7 @@ DATOS=[
         "Motivo del tema": "SEGURIDAD",
         "Comentario": "Platica de 5 Minutos",
         "Pieza ID": "NA"
-      }
+      },
       {
         "ID": 299,
         "Fecha": "2026-05-29",
@@ -4182,7 +4182,7 @@ DATOS=[
         "Motivo del tema": "SEGURIDAD",
         "Comentario": "Platica de 5 Minutos",
         "Pieza ID": "NA"
-      }
+      },
       {
         "ID": 300,
         "Fecha": "2026-05-29",
@@ -4196,7 +4196,7 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "1",
         "Pieza ID": "66101523-9f59-47eb-a2d0-d12672bb514a"
-      }
+      },
       {
         "ID": 301,
         "Fecha": "2026-05-29",
@@ -4210,7 +4210,7 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "1",
         "Pieza ID": "68873f84-1263-4440-b5e1-3bfc58f4403a"
-      }
+      },
       {
         "ID": 302,
         "Fecha": "2026-05-29",
@@ -4224,7 +4224,7 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "1",
         "Pieza ID": "47f69aa8-c589-4b96-8b0f-d0088589dc08"
-      }
+      },
       {
         "ID": 303,
         "Fecha": "2026-05-29",
@@ -4252,7 +4252,7 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "0.5",
         "Pieza ID": "2a564a4a-0b0a-447d-8f7b-142b0675dd6d"
-      }
+      },
       {
         "ID": 305,
         "Fecha": "2026-05-29",
@@ -4266,7 +4266,7 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "1",
         "Pieza ID": "c438df11-63ef-4310-8174-fe79c438db19"
-      }
+      },
       {
         "ID": 306,
         "Fecha": "2026-05-29",
@@ -4280,7 +4280,7 @@ DATOS=[
         "Motivo del tema": "Normal",
         "Comentario": "1",
         "Pieza ID": "621b2c7b-cbc2-46c8-83b3-56613ea37679"
-      }
+      },
       {
         "ID": 307,
         "Fecha": "2026-05-29",

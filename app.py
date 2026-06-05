@@ -5428,6 +5428,34 @@ DATOS=[
       "Motivo del tema": "Normal",
       "Comentario": "0.5",
       "Pieza ID": "84aa36fd-6159-4374-abe0-e62822590c57"
+      },
+      {
+      "ID": 389,
+      "Fecha": "2026-06-05",
+      "Hora de inicio": "2026-06-05T06:00:00",
+      "Hora final": "2026-06-05T06:26:00",
+      "Proyecto": "Gondola Iron Rotary",
+      "Ensamble": "Stub sill",
+      "Nave": "Nave 6",
+      "Lote": "R42450",
+      "Tema": "Paro",
+      "Motivo del tema": "SEGURIDAD",
+      "Comentario": "Platica de 5 Minutos",
+      "Pieza ID": "NA"
+      },
+      {
+      "ID": 390,
+      "Fecha": "2026-06-05",
+      "Hora de inicio": "2026-06-05T06:00:00",
+      "Hora final": "2026-06-05T06:26:00",
+      "Proyecto": "Gondola Iron Rotary",
+      "Ensamble": "Bolster",
+      "Nave": "Nave 6",
+      "Lote": "R42450",
+      "Tema": "Paro",
+      "Motivo del tema": "SEGURIDAD",
+      "Comentario": "Platica de 5 Minutos",
+      "Pieza ID": "NA"
       }
 ]
 

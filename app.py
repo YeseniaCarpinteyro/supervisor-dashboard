@@ -5292,7 +5292,7 @@ DATOS=[
       {
       "ID": 379,
       "Fecha": "2026-06-04",
-      "Hora de inicio": "2026-06-04T13:29:00",
+      "Hora de inicio": "2026-06-04T13:10:00",
       "Hora final": "2026-06-04T15:06:00",
       "Proyecto": "Gondola Iron Rotary",
       "Ensamble": "Stub sill",
@@ -5306,7 +5306,7 @@ DATOS=[
       {
       "ID": 380,
       "Fecha": "2026-06-04",
-      "Hora de inicio": "2026-06-04T13:29:00",
+      "Hora de inicio": "2026-06-04T13:10:00",
       "Hora final": "2026-06-04T15:06:00",
       "Proyecto": "Gondola Iron Rotary",
       "Ensamble": "Bolster",

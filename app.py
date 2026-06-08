@@ -5628,7 +5628,7 @@ DATOS=[
       {
         "ID": 403,
         "Fecha": "2026-06-08",
-        "Hora de inicio": "2026-06-08T06:25:00",
+        "Hora de inicio": "2026-06-08T06:00:00",
         "Hora final": "2026-06-08T06:25:00",
         "Proyecto": "Flat Car",
         "Ensamble": "Bolster",
@@ -5642,7 +5642,7 @@ DATOS=[
       {
         "ID": 404,
         "Fecha": "2026-06-08",
-        "Hora de inicio": "2026-06-08T06:25:00",
+        "Hora de inicio": "2026-06-08T06:00:00",
         "Hora final": "2026-06-08T06:26:00",
         "Proyecto": "Flat Car",
         "Ensamble": "Crossbearer",

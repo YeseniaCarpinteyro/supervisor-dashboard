@@ -7388,6 +7388,20 @@ DATOS=[
         "Motivo del tema": "SEGURIDAD",
         "Comentario": "Platica de 5 Minutos",
         "Pieza ID": "NA"
+      },
+      {
+        "ID": 529,
+        "Fecha": "2026-06-12",
+        "Hora de inicio": "2026-06-12T08:33:00",
+        "Hora final": "2026-06-12T10:28:00",
+        "Proyecto": "Gondola Iron Rotary",
+        "Ensamble": "Bolster",
+        "Nave": "Nave 6",
+        "Lote": "R42450",
+        "Tema": "Liberacion",
+        "Motivo del tema": "Normal",
+        "Comentario": "0.5",
+        "Pieza ID": "510a30bd-81d4-47fc-9aa0-9c3a5d565a64"
       }
       
 ]
